@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { randomBytes } from 'node:crypto';
 import type { CaseCreate } from '@auth/contracts';
 import type { CaseStatus } from '@auth/contracts';
+import { TemplateStore } from '../templates/template.store';
 
 export type StoredCase = CaseCreate & {
   id: string;
@@ -17,8 +18,10 @@ export type StoredCase = CaseCreate & {
 @Injectable()
 export class CaseStore {
   private readonly cases = new Map<string, StoredCase>();
+  constructor(private readonly templates: TemplateStore = new TemplateStore()) {}
 
   create(input: CaseCreate): StoredCase {
+    if (!this.templates.hasVersion(input.templateVersionId)) throw new BadRequestException('template version not found');
     const now = new Date().toISOString();
     const value: StoredCase = {
       ...input,
