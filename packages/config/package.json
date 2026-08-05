@@ -1,1 +1,1 @@
-{"name":"@auth/config","version":"0.1.0","private":true,"type":"module","scripts":{"test":"vitest run","typecheck":"tsc --noEmit","build":"tsc -p tsconfig.json"},"devDependencies":{"typescript":"^5.0.0","vitest":"^2.0.0"}}
+{"name":"@auth/config","version":"0.1.0","private":true,"type":"module","scripts":{"test":"vitest run","typecheck":"tsc --noEmit","build":"tsc -p tsconfig.json"},"devDependencies":{"@types/node":"^22.0.0","typescript":"^5.0.0","vitest":"^2.0.0"}}

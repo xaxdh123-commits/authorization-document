@@ -1,6 +1,1 @@
-{
-  "name": "authorization-document",
-  "private": true,
-  "packageManager": "pnpm@10.30.2",
-  "scripts": {"test": "pnpm -r test", "typecheck": "pnpm -r typecheck", "build": "pnpm -r build"}
-}
+{"name":"authorization-document","private":true,"packageManager":"pnpm@9.0.0","scripts":{"test":"pnpm -r test","build":"pnpm -r build","typecheck":"pnpm -r typecheck"},"devDependencies":{"typescript":"^5.0.0","vitest":"^2.0.0"}}
