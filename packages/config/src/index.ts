@@ -1,1 +1,1 @@
-export * from './env';
+export const packageName = '@auth/config';

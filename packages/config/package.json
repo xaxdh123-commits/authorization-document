@@ -1,1 +1,1 @@
-{"name":"@auth/config","version":"0.0.1","private":true,"scripts":{"test":"vitest run --passWithNoTests","typecheck":"tsc --noEmit","build":"tsc -p tsconfig.json"},"devDependencies":{"vitest":"^2.1.8"}}
+{"name":"@auth/config","version":"0.1.0","private":true,"type":"module","scripts":{"test":"vitest run","typecheck":"tsc --noEmit","build":"tsc -p tsconfig.json"},"devDependencies":{"typescript":"^5.0.0","vitest":"^2.0.0"}}
