@@ -1,0 +1,2 @@
+import { render, screen } from '@testing-library/react'; import userEvent from '@testing-library/user-event'; import { ReviewDetailPage } from './ReviewDetailPage';
+test('sends approve command through review client', async () => { const approve = vi.fn(async () => undefined); const user = userEvent.setup(); render(<ReviewDetailPage client={{ approve }} />); await user.click(screen.getByRole('button', { name: 'Approve item' })); expect(approve).toHaveBeenCalled(); });
