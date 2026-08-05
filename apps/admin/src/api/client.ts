@@ -32,7 +32,10 @@ export function createApiClient() {
     },
     createCase: (input: CaseCreateInput) => request<{ id: string }>('/cases', { method: 'POST', body: JSON.stringify(input) }),
     listCases: () => request<CaseSummary[]>('/cases'),
-    getDashboard: () => request<DashboardData>('/dashboard'),
+    async getDashboard(): Promise<DashboardData> {
+      const result = await request<{ draft: number; awaitingCustomer: number; pendingReview: number; needsSupplement: number; completed: number }>('/dashboard');
+      return { statuses: { draft: result.draft, pending: result.pendingReview, overdue: result.needsSupplement }, recent: [], overdue: [] };
+    },
     listReviews: () => request<ReviewSummary[]>('/reviews'),
   };
 }
