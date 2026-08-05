@@ -1,0 +1,10 @@
+const apiBase = (import.meta.env.VITE_API_BASE_URL ?? '/api').replace(/\/$/, '');
+export type PublicCaseContext = { id?: string; requirements?: string[]; customerName?: string; templateVersionId?: string; accessToken?: string };
+export function getPublicCaseContext(): PublicCaseContext {
+  const query = new URLSearchParams(window.location.search); const token = query.get('access_token') ?? query.get('token') ?? localStorage.getItem('access_token') ?? localStorage.getItem('token') ?? undefined;
+  let data: PublicCaseContext = {};
+  const encoded = query.get('case') ?? localStorage.getItem('authorization_case');
+  if (encoded) { try { data = JSON.parse(encoded.startsWith('{') ? encoded : atob(encoded)); } catch { /* invalid optional context */ } }
+  return { ...data, id: data.id ?? query.get('caseId') ?? query.get('id') ?? undefined, accessToken: token };
+}
+export async function publicRequest<T>(path: string, init: RequestInit = {}) { const headers = new Headers(init.headers); const token = getPublicCaseContext().accessToken; if (token) headers.set('Authorization', `Bearer ${token}`); if (init.body) headers.set('Content-Type', 'application/json'); const response = await fetch(`${apiBase}${path}`, { ...init, headers }); if (!response.ok) throw new Error(`API request failed (${response.status})`); return response.json() as Promise<T>; }
