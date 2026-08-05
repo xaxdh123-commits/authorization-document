@@ -4,7 +4,7 @@ import type { DashboardData } from '../features/dashboard/DashboardPage';
 import type { CaseSummary } from '../features/cases/CaseListPage';
 import type { ReviewSummary } from '../features/reviews/ReviewQueuePage';
 
-const apiBase = (import.meta.env.VITE_API_BASE_URL ?? '/api').replace(/\/$/, '');
+const apiBase = (import.meta.env.VITE_API_BASE_URL ?? (import.meta.env.DEV ? 'http://127.0.0.1:3000' : '/api')).replace(/\/$/, '');
 export function getAccessToken() {
   const query = new URLSearchParams(window.location.search);
   return query.get('access_token') ?? query.get('token') ?? localStorage.getItem('access_token') ?? localStorage.getItem('token');
