@@ -1,0 +1,1 @@
+import { CasesController } from './cases.controller'; describe('CasesController',()=>{it('creates and lists typed cases',()=>{const c=new CasesController(); const created=c.create({customerName:'C',contactName:'P',factoryDepartment:'F',materials:[{name:'M'}],templateVersionId:'t'}); expect(created.status).toBe('DRAFT'); expect(c.list()).toHaveLength(1);});});

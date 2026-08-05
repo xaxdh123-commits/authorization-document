@@ -1,0 +1,2 @@
+import fs from 'node:fs'; import path from 'node:path';
+describe('auth role schema',()=>{ const sql=fs.readFileSync(path.resolve(__dirname,'../../../prisma/migrations/202608050001_auth_roles/migration.sql'),'utf8'); it('defines digest, JSONB and scope constraints',()=>{ expect(sql).toMatch(/"token_digest" TEXT PRIMARY KEY/); expect(sql).toMatch(/"roles" JSONB/); expect(sql).toMatch(/CHECK \("data_scope" IN \('SELF','DEPT','ALL'\)\)/); expect(sql).not.toMatch(/token\s+TEXT/i); }); });

@@ -1,0 +1,3 @@
+import { Body, Controller, Get, Post } from '@nestjs/common'; import { CaseCreateSchema } from '@auth/contracts';
+type StoredCase={id:string;customerName:string;contactName:string;factoryDepartment:string;materials:unknown[];templateVersionId:string;status:'DRAFT'};
+@Controller('cases') export class CasesController { private readonly cases:StoredCase[]=[]; @Post() create(@Body() body:unknown):StoredCase { const input=CaseCreateSchema.parse(body); const value:StoredCase={id:`case-${this.cases.length+1}`,...input,status:'DRAFT'}; this.cases.push(value); return value; } @Get() list():StoredCase[]{ return this.cases; } }

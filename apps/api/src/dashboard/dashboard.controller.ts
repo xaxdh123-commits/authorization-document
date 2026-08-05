@@ -1,0 +1,1 @@
+import { Controller, Get } from '@nestjs/common'; @Controller('dashboard') export class DashboardController { @Get() summary(){ return {draft:0,awaitingCustomer:0,pendingReview:0,needsSupplement:0,completed:0}; } }
