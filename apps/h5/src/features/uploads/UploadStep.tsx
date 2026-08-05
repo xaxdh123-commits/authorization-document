@@ -1,0 +1,2 @@
+import { useState } from 'react';
+export function UploadStep({ requirements }: { requirements: string[] }) { const [retrying, setRetrying] = useState<string>(); return <section><h1>Uploads</h1>{requirements.map(r => <label key={r}>{r}<input type="file" aria-label={`Upload ${r}`} /><button type="button" onClick={() => setRetrying(r)}>Retry {r}</button>{retrying === r && <span>Retrying {r}</span>}</label>)}</section>; }

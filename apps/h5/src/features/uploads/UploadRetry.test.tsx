@@ -1,0 +1,2 @@
+import { render, screen } from '@testing-library/react'; import userEvent from '@testing-library/user-event'; import { UploadStep } from './UploadStep';
+test('offers retry after upload failure', async () => { const user = userEvent.setup(); render(<UploadStep requirements={['Identity']} />); await user.click(screen.getByRole('button', { name: 'Retry Identity' })); expect(screen.getByText('Retrying Identity')).toBeInTheDocument(); });
