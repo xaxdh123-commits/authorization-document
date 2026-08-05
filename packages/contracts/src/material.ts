@@ -1,1 +1,1 @@
-import { MaterialItemSchema } from './index'; export { MaterialItemSchema }; export const MaterialListSchema=MaterialItemSchema.array().min(1);
+import { z } from 'zod'; export const MaterialItemSchema=z.object({name:z.string().min(1),specification:z.string().min(1),quantity:z.number().positive(),material:z.string().min(1),craft:z.string().min(1),optionalPrice:z.number().nonnegative().optional()}); export const MaterialListSchema=MaterialItemSchema.array().min(1);
