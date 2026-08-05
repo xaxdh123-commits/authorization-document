@@ -1,0 +1,4 @@
+import { useEffect, useMemo, useState } from 'react';
+export type CaseSummary = { id: string; title: string; status: string };
+export interface CaseListClient { listCases(): Promise<CaseSummary[]>; }
+export function CaseListPage({ client }: { client: CaseListClient }) { const [cases, setCases] = useState<CaseSummary[]>(); const [query, setQuery] = useState(''); useEffect(() => { client.listCases().then(setCases); }, [client]); const filtered = useMemo(() => (cases ?? []).filter(c => c.title.toLowerCase().includes(query.toLowerCase())), [cases, query]); return <main><h1>Business cases</h1><input aria-label="Search cases" role="searchbox" value={query} onChange={e => setQuery(e.target.value)} placeholder="Search" />{!cases ? <p>Loading cases…</p> : filtered.length ? <ul>{filtered.map(c => <li key={c.id}>{c.title} <small>{c.status}</small></li>)}</ul> : <p>No cases found</p>}</main>; }

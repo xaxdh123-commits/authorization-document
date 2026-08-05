@@ -1,0 +1,1 @@
+export function ReviewDetailPage() { return <main><h1>Review detail</h1><section><h2>Supplement differences</h2><p>Compare submitted and requested materials.</p></section><button type="button">Approve item</button><button type="button">Reject item</button><button type="button">Retry PDF</button></main>; }

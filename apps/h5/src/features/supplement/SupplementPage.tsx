@@ -1,0 +1,1 @@
+export function SupplementPage({ reason, items }: { reason: string; items: string[] }) { return <main><h1>Supplement required</h1><p>{reason}</p><ul>{items.map(i => <li key={i}>{i}</li>)}</ul></main>; }

@@ -1,0 +1,3 @@
+import { useEffect, useState } from 'react';
+export type ReviewSummary = { id: string; caseTitle: string; status: string }; export interface ReviewClient { listReviews(): Promise<ReviewSummary[]>; }
+export function ReviewQueuePage({ client }: { client: ReviewClient }) { const [items, setItems] = useState<ReviewSummary[]>(); useEffect(() => { client.listReviews().then(setItems); }, [client]); if (!items) return <p>Loading reviews…</p>; return <main><h1>Review queue</h1>{items.length ? <ul>{items.map(i => <li key={i.id}>{i.caseTitle} <button type="button">Open review</button></li>)}</ul> : <p>Nothing to review</p>}</main>; }

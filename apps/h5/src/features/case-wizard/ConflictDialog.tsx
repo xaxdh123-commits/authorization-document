@@ -1,0 +1,1 @@
+export function ConflictDialog() { return <section role="dialog"><h1>Draft conflict</h1><p>The server has a newer version of this draft.</p><button type="button">Reload server copy</button><button type="button">Keep my copy</button></section>; }
