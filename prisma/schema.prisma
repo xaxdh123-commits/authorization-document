@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+model CachedBackendUser {
+  tokenDigest String @id @map("token_digest")
+  userId String @map("user_id")
+  name String?
+  departmentId String? @map("department_id")
+  departmentName String? @map("department_name")
+  roles Json
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  @@map("CachedBackendUser")
+}
+model RoleMapping {
+  roleKey String @id @map("role_key")
+  capabilities Json
+  dataScope String @map("data_scope")
+  enabled Boolean @default(true)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  @@map("RoleMapping")
+}
