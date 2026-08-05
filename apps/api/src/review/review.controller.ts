@@ -6,4 +6,5 @@ import { CaseStore } from '../cases/case.store';
   @Get(':id') detail(@Param('id') id: string) { const item = this.store.get(id); if (!item) throw new NotFoundException('case not found'); return item; }
   @Post(':id/start') start(@Param('id') id: string) { const item = this.store.get(id); if (!item) throw new NotFoundException('case not found'); return this.store.updateStatus(item, 'IN_REVIEW'); }
   @Post(':id/complete') complete(@Param('id') id: string) { const item = this.store.get(id); if (!item) throw new NotFoundException('case not found'); return this.store.updateStatus(item, 'COMPLETED'); }
+  @Post(':id/reject') reject(@Param('id') id: string) { const item = this.store.get(id); if (!item) throw new NotFoundException('case not found'); return this.store.updateStatus(item, 'NEEDS_SUPPLEMENT'); }
 }

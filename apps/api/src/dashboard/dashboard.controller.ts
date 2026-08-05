@@ -4,6 +4,6 @@ import { CaseStore } from '../cases/case.store';
   constructor(private readonly store: CaseStore = new CaseStore()) {}
   @Get() summary() {
     const cases = this.store.list();
-    return { draft: cases.filter((x) => x.status === 'DRAFT').length, awaitingCustomer: cases.filter((x) => x.status === 'SUBMITTED').length, pendingReview: cases.filter((x) => x.status === 'IN_REVIEW').length, needsSupplement: 0, completed: cases.filter((x) => x.status === 'COMPLETED').length };
+    return { draft: cases.filter((x) => x.status === 'DRAFT').length, awaitingCustomer: cases.filter((x) => x.status === 'SUBMITTED').length, pendingReview: cases.filter((x) => x.status === 'IN_REVIEW').length, needsSupplement: cases.filter((x) => x.status === 'NEEDS_SUPPLEMENT').length, completed: cases.filter((x) => x.status === 'COMPLETED').length };
   }
 }
