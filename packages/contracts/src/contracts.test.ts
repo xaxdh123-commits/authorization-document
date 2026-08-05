@@ -1,0 +1,3 @@
+import { describe, expect, it } from 'vitest';
+import { CaseStatusSchema, DataScopeSchema, MaterialItemSchema } from './index';
+describe('contracts',()=>{ it('accepts known enums and material',()=>{ expect(CaseStatusSchema.parse('DRAFT')).toBe('DRAFT'); expect(DataScopeSchema.parse('ALL')).toBe('ALL'); expect(MaterialItemSchema.parse({name:'x',specification:'s',quantity:1,material:'m',craft:'c'})).toBeTruthy(); }); it('rejects unknown status and empty materials',()=>{ expect(()=>CaseStatusSchema.parse('NOPE')).toThrow(); expect(()=>MaterialItemSchema.array().min(1).parse([])).toThrow(); }); });

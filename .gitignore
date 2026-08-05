@@ -1,8 +1,6 @@
-.superpowers/
-.env
 node_modules/
 dist/
+.env
+!.env.example
 coverage/
-logs/
-uploads/
-
+prisma/*.db
