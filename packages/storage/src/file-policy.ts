@@ -8,6 +8,9 @@ export const MAX_CASE_BYTES = 200 * 1024 * 1024;
 const MIME_BY_EXT: Record<string, string> = {'.pdf':'application/pdf','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg'};
 
 export function validateFileMetadata(name: string, mimeType: string, size: number): void {
+  if (/[\u0000-\u001f\u007f]/.test(name) || /[<>:"|?*]/.test(name) || /[. ]$/.test(name) || /\s/.test(name)) throw new Error('FILE_NAME_INVALID');
+  const reserved = /^(con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\..*)?$/i;
+  if (reserved.test(name)) throw new Error('FILE_NAME_INVALID');
   const ext = path.extname(name).toLowerCase();
   const expected = MIME_BY_EXT[ext];
   if (!expected || expected !== mimeType) throw new Error('FILE_TYPE_NOT_ALLOWED');
@@ -25,6 +28,7 @@ export function validateCaseBytes(total: number): void {
 
 export function storageKeyFor(id: string, originalName: string): string {
   if (!/^[a-zA-Z0-9_-]+$/.test(id)) throw new Error('STORAGE_KEY_INVALID');
+  validateFileMetadata(originalName, MIME_BY_EXT[path.extname(originalName).toLowerCase()] ?? '', 0);
   const ext = path.extname(originalName).toLowerCase();
   if (!MIME_BY_EXT[ext]) throw new Error('FILE_TYPE_NOT_ALLOWED');
   return `${id}/${crypto.randomUUID()}${ext}`;
