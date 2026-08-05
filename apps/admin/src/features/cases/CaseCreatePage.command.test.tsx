@@ -1,0 +1,2 @@
+import { render, screen } from '@testing-library/react'; import userEvent from '@testing-library/user-event'; import { CaseCreatePage } from './CaseCreatePage';
+test('submits validated case through typed command client', async () => { const createCase = async () => ({ id: 'C1' }); const user = userEvent.setup(); render(<CaseCreatePage client={{ createCase }} />); await user.type(screen.getByLabelText('Customer'), 'Acme'); await user.click(screen.getByRole('button', { name: 'Create case' })); expect(await screen.findByText('Case C1 created')).toBeInTheDocument(); });

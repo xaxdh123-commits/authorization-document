@@ -1,0 +1,2 @@
+import { render, screen } from '@testing-library/react'; import userEvent from '@testing-library/user-event'; import { SignaturePlacementEditor } from './SignaturePlacementEditor';
+test('keeps one signing mode selected', async () => { const user = userEvent.setup(); render(<SignaturePlacementEditor />); const select = screen.getByLabelText('Signature mode'); await user.selectOptions(select, 'Stamp'); expect((select as HTMLSelectElement).value).toBe('Stamp'); });

@@ -1,0 +1,2 @@
+import { render, screen } from '@testing-library/react'; import { MemoryRouter } from 'react-router-dom'; import { AuthProvider } from '../../auth/AuthProvider'; import { AppRouter } from '../../app/router';
+test('forbids dashboard without dashboard read capability', async () => { render(<AuthProvider client={{ getSession: async () => ({ userId: 'u', roleKey: 'staff', abilities: [] }) }}><MemoryRouter initialEntries={['/dashboard']}><AppRouter /></MemoryRouter></AuthProvider>); expect(await screen.findByRole('heading', { name: 'Forbidden' })).toBeInTheDocument(); });

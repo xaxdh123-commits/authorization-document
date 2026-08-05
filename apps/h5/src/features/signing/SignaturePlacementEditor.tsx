@@ -1,1 +1,1 @@
-export function SignaturePlacementEditor() { return <section><label>Signature mode<select aria-label="Signature mode"><option>Handwritten</option><option>Stamp</option></select></label><p>Place your signature on required pages.</p></section>; }
+export function SignaturePlacementEditor() { return <section><label>Signature mode<select aria-label="Signature mode"><option value="Handwritten">Handwritten</option><option value="Stamp">Stamp</option></select></label><p>Place your signature on required pages.</p></section>; }

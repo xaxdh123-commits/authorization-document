@@ -1,0 +1,2 @@
+import { render, screen } from '@testing-library/react'; import userEvent from '@testing-library/user-event'; import { CaseWizardPage } from './CaseWizardPage';
+test('autosaves information through draft client', async () => { const saveDraft = vi.fn(async () => undefined); const user = userEvent.setup(); render(<CaseWizardPage draftClient={{ saveDraft }} />); await user.type(screen.getByLabelText('Full name'), 'A'); await new Promise(r => setTimeout(r, 350)); expect(saveDraft).toHaveBeenCalled(); });

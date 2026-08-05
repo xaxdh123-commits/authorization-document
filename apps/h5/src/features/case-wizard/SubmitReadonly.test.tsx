@@ -1,0 +1,2 @@
+import { render, screen } from '@testing-library/react'; import userEvent from '@testing-library/user-event'; import { SubmitStep } from './SubmitStep';
+test('becomes read-only after submission', async () => { const user = userEvent.setup(); render(<SubmitStep />); await user.click(screen.getByRole('button', { name: 'Submit application' })); expect(screen.getByText('Submitted')).toBeInTheDocument(); expect(screen.queryByRole('button', { name: 'Submit application' })).not.toBeInTheDocument(); });
