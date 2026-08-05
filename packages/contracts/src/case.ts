@@ -1,2 +1,2 @@
-import { z } from 'zod'; import { CaseStatusSchema, DataScopeSchema } from './index';
+import { z } from 'zod'; import { CaseStatusSchema, DataScopeSchema } from './enums';
 export const CaseCreateSchema=z.object({customerName:z.string().min(1),contactName:z.string().min(1),factoryDepartment:z.string().min(1),materials:z.array(z.any()).min(1),templateVersionId:z.string().min(1)}); export const CaseQuerySchema=z.object({status:CaseStatusSchema.optional(),scope:DataScopeSchema.optional()}); export type CaseCreate=z.infer<typeof CaseCreateSchema>;
