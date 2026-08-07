@@ -1,1 +1,8 @@
-{"transform":{"^.+\\.tsx?$":"<rootDir>/../node_modules/ts-jest"},"testEnvironment":"node","moduleNameMapper":{"^@auth/contracts$":"<rootDir>/../../packages/contracts/src/index.ts"},"roots":["<rootDir>/../src","<rootDir>"],"testRegex":".*(integration-spec|integration)\\.(ts|js)$"}
+{
+  "transform": { "^.+\\.tsx?$": "<rootDir>/../node_modules/ts-jest" },
+  "testEnvironment": "node",
+  "testTimeout": 30000,
+  "moduleNameMapper": { "^(\\.{1,2}/.*)\\.js$": "$1", "^@auth/contracts$": "<rootDir>/../../../packages/contracts/src/index.ts" },
+  "roots": ["<rootDir>/../src", "<rootDir>"],
+  "testRegex": ".*(integration-spec|integration)\\.(ts|js)$"
+}

@@ -1,0 +1,25 @@
+{
+  "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+  "generatedAt": "2026-08-06T18:37:31.146Z",
+  "gitRef": "WORKTREE:f44c84a1e52c",
+  "name": "recovery-drill",
+  "status": "NOT_RUN",
+  "exitCode": 0,
+  "startedAt": "2026-08-06T18:38:34.249Z",
+  "command": [
+    "powershell",
+    "-NoProfile",
+    "-File",
+    "deploy/recovery-drill.ps1",
+    "-ValidateOnly",
+    "-DrillDatabaseUrl",
+    "postgresql://drill:REDACTED@127.0.0.1:5432/authorization_recovery_drill",
+    "-DrillFileRoot",
+    "C:\\authorization-recovery\\files",
+    "-BackupRoot",
+    "C:\\authorization-recovery\\backups",
+    "-AllowedRoot",
+    "C:\\authorization-recovery"
+  ],
+  "output": "VALID DATABASE=authorization_recovery_drill\r\nVALID FILE_ROOT=C:\\authorization-recovery\\files\r\nVALID BACKUP_ROOT=C:\\authorization-recovery\\backups\r\nTARGET RPO<=24h RTO<=8h PDF_RECOVERY<=60s DUPLICATE_FINAL=0\r\nGATE_STATUS=NOT_RUN\r\nValidation only; no backup, restore, restart, or write\r\n"
+}

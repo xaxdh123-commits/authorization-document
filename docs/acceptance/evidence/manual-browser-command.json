@@ -1,0 +1,14 @@
+{
+  "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+  "generatedAt": "2026-08-06T18:37:31.146Z",
+  "gitRef": "WORKTREE:f44c84a1e52c",
+  "name": "manual-browser",
+  "status": "NOT_RUN",
+  "exitCode": 0,
+  "startedAt": "2026-08-06T18:38:33.963Z",
+  "command": [
+    "pnpm.cmd",
+    "validate:manual-matrix"
+  ],
+  "output": "\n> authorization-document@ validate:manual-matrix C:\\Users\\Administrator\\Documents\\GitHub\\authorization-document\n> pnpm --filter @auth/e2e validate:manual-matrix\n\n\n> @auth/e2e@ validate:manual-matrix C:\\Users\\Administrator\\Documents\\GitHub\\authorization-document\\tests\\e2e\n> node run-manual-matrix-safe.mjs\n\nGATE_STATUS=NOT_RUN\n真实 Chrome 当前/前一版本、Android、iOS Safari 与微信内置浏览器签署证据尚未提供\n"
+}

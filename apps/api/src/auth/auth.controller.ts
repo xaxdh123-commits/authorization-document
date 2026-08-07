@@ -1,22 +1,25 @@
-import { Controller, Get, Headers } from '@nestjs/common';
+import { Controller, Get, Headers, UnauthorizedException } from '@nestjs/common';
+import { AuthService } from './auth.service';
 
 @Controller('auth')
 export class AuthController {
+  constructor(private readonly authService: AuthService) {}
+
   @Get('getInfo')
   async getInfo(@Headers('authorization') authorization?: string) {
-    const upstream = process.env.AUTH_GET_INFO_URL;
-    if (upstream) {
-      const response = await fetch(upstream, { headers: authorization ? { authorization } : undefined });
-      if (!response.ok) throw new Error(`upstream auth failed (${response.status})`);
-      return response.json();
-    }
-
+    if (!authorization) throw new UnauthorizedException('未提供登录凭证');
+    const { user } = await this.authService.authenticate(authorization, { write: false });
     return {
       code: 200,
       msg: '操作成功',
-      permissions: ['*:*:*'],
-      roles: ['admin'],
-      user: { userId: 1, userName: 'demo', nickName: '本地演示账号', roles: [{ roleKey: 'admin' }] },
+      roles: user.roles,
+      user: {
+        userId: user.userId,
+        nickName: user.name,
+        deptId: user.departmentId,
+        deptName: user.departmentName,
+        roles: user.roles.map((roleKey) => ({ roleKey })),
+      },
     };
   }
 }

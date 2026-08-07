@@ -1,0 +1,287 @@
+{
+  "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+  "generatedAt": "2026-08-06T18:37:31.146Z",
+  "gitRef": "WORKTREE:f44c84a1e52c",
+  "localCodeStatus": "LOCAL_CODE_PASS",
+  "releaseStatus": "RELEASE_BLOCKED",
+  "results": [
+    {
+      "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+      "generatedAt": "2026-08-06T18:37:31.146Z",
+      "gitRef": "WORKTREE:f44c84a1e52c",
+      "name": "release-tools",
+      "status": "PASS",
+      "exitCode": 0,
+      "startedAt": "2026-08-06T18:37:31.907Z",
+      "command": [
+        "pnpm.cmd",
+        "test:release-tools"
+      ],
+      "localRequired": true
+    },
+    {
+      "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+      "generatedAt": "2026-08-06T18:37:31.146Z",
+      "gitRef": "WORKTREE:f44c84a1e52c",
+      "name": "deploy-script-mocks",
+      "status": "PASS",
+      "exitCode": 0,
+      "startedAt": "2026-08-06T18:37:32.781Z",
+      "command": [
+        "powershell",
+        "-NoProfile",
+        "-File",
+        "deploy/deploy-scripts.test.ps1"
+      ],
+      "localRequired": true
+    },
+    {
+      "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+      "generatedAt": "2026-08-06T18:37:31.146Z",
+      "gitRef": "WORKTREE:f44c84a1e52c",
+      "name": "typecheck",
+      "status": "PASS",
+      "exitCode": 0,
+      "startedAt": "2026-08-06T18:37:44.003Z",
+      "command": [
+        "pnpm.cmd",
+        "typecheck"
+      ],
+      "localRequired": true
+    },
+    {
+      "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+      "generatedAt": "2026-08-06T18:37:31.146Z",
+      "gitRef": "WORKTREE:f44c84a1e52c",
+      "name": "test",
+      "status": "PASS",
+      "exitCode": 0,
+      "startedAt": "2026-08-06T18:38:00.377Z",
+      "command": [
+        "pnpm.cmd",
+        "test"
+      ],
+      "localRequired": true
+    },
+    {
+      "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+      "generatedAt": "2026-08-06T18:37:31.146Z",
+      "gitRef": "WORKTREE:f44c84a1e52c",
+      "name": "integration",
+      "status": "NOT_RUN",
+      "exitCode": 0,
+      "startedAt": "2026-08-06T18:38:01.043Z",
+      "command": [
+        "pnpm.cmd",
+        "test:integration"
+      ],
+      "localRequired": false
+    },
+    {
+      "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+      "generatedAt": "2026-08-06T18:37:31.146Z",
+      "gitRef": "WORKTREE:f44c84a1e52c",
+      "name": "e2e",
+      "status": "NOT_RUN",
+      "exitCode": 0,
+      "startedAt": "2026-08-06T18:38:02.078Z",
+      "command": [
+        "pnpm.cmd",
+        "test:e2e"
+      ],
+      "localRequired": false
+    },
+    {
+      "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+      "generatedAt": "2026-08-06T18:37:31.146Z",
+      "gitRef": "WORKTREE:f44c84a1e52c",
+      "name": "browser-matrix",
+      "status": "NOT_RUN",
+      "exitCode": 0,
+      "startedAt": "2026-08-06T18:38:03.100Z",
+      "command": [
+        "pnpm.cmd",
+        "test:browser-matrix"
+      ],
+      "localRequired": false
+    },
+    {
+      "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+      "generatedAt": "2026-08-06T18:37:31.146Z",
+      "gitRef": "WORKTREE:f44c84a1e52c",
+      "name": "create-case-timing",
+      "status": "NOT_RUN",
+      "exitCode": 0,
+      "startedAt": "2026-08-06T18:38:03.795Z",
+      "command": [
+        "pnpm.cmd",
+        "--filter",
+        "@auth/e2e",
+        "test:timing"
+      ],
+      "localRequired": false
+    },
+    {
+      "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+      "generatedAt": "2026-08-06T18:37:31.146Z",
+      "gitRef": "WORKTREE:f44c84a1e52c",
+      "name": "build",
+      "status": "PASS",
+      "exitCode": 0,
+      "startedAt": "2026-08-06T18:38:16.082Z",
+      "command": [
+        "pnpm.cmd",
+        "build"
+      ],
+      "localRequired": true
+    },
+    {
+      "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+      "generatedAt": "2026-08-06T18:37:31.146Z",
+      "gitRef": "WORKTREE:f44c84a1e52c",
+      "name": "dist-base",
+      "status": "PASS",
+      "exitCode": 0,
+      "startedAt": "2026-08-06T18:38:16.122Z",
+      "command": [
+        "C:\\nvm4w\\nodejs\\node.exe",
+        "scripts/verify-dist-base.mjs"
+      ],
+      "localRequired": true
+    },
+    {
+      "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+      "generatedAt": "2026-08-06T18:37:31.146Z",
+      "gitRef": "WORKTREE:f44c84a1e52c",
+      "name": "prisma-validate",
+      "status": "PASS",
+      "exitCode": 0,
+      "startedAt": "2026-08-06T18:38:17.857Z",
+      "command": [
+        "pnpm.cmd",
+        "prisma:validate"
+      ],
+      "localRequired": true
+    },
+    {
+      "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+      "generatedAt": "2026-08-06T18:37:31.146Z",
+      "gitRef": "WORKTREE:f44c84a1e52c",
+      "name": "prisma-generate",
+      "status": "PASS",
+      "exitCode": 0,
+      "startedAt": "2026-08-06T18:38:19.824Z",
+      "command": [
+        "pnpm.cmd",
+        "prisma:generate"
+      ],
+      "localRequired": true
+    },
+    {
+      "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+      "generatedAt": "2026-08-06T18:37:31.146Z",
+      "gitRef": "WORKTREE:f44c84a1e52c",
+      "name": "format",
+      "status": "PASS",
+      "exitCode": 0,
+      "startedAt": "2026-08-06T18:38:20.504Z",
+      "command": [
+        "pnpm.cmd",
+        "format:check"
+      ],
+      "localRequired": true
+    },
+    {
+      "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+      "generatedAt": "2026-08-06T18:37:31.146Z",
+      "gitRef": "WORKTREE:f44c84a1e52c",
+      "name": "lint",
+      "status": "PASS",
+      "exitCode": 0,
+      "startedAt": "2026-08-06T18:38:31.316Z",
+      "command": [
+        "pnpm.cmd",
+        "lint"
+      ],
+      "localRequired": true
+    },
+    {
+      "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+      "generatedAt": "2026-08-06T18:37:31.146Z",
+      "gitRef": "WORKTREE:f44c84a1e52c",
+      "name": "pdf-visual",
+      "status": "NOT_RUN",
+      "exitCode": 0,
+      "startedAt": "2026-08-06T18:38:32.919Z",
+      "command": [
+        "pnpm.cmd",
+        "--filter",
+        "@auth/worker",
+        "test:visual"
+      ],
+      "localRequired": false
+    },
+    {
+      "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+      "generatedAt": "2026-08-06T18:37:31.146Z",
+      "gitRef": "WORKTREE:f44c84a1e52c",
+      "name": "manual-browser",
+      "status": "NOT_RUN",
+      "exitCode": 0,
+      "startedAt": "2026-08-06T18:38:33.963Z",
+      "command": [
+        "pnpm.cmd",
+        "validate:manual-matrix"
+      ],
+      "localRequired": false
+    },
+    {
+      "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+      "generatedAt": "2026-08-06T18:37:31.146Z",
+      "gitRef": "WORKTREE:f44c84a1e52c",
+      "name": "deployment-smoke",
+      "status": "NOT_RUN",
+      "exitCode": 0,
+      "startedAt": "2026-08-06T18:38:34.102Z",
+      "command": [
+        "powershell",
+        "-NoProfile",
+        "-File",
+        "deploy/smoke.ps1",
+        "-ValidateOnly",
+        "-ApiUrl",
+        "https://authorization.example.com/api/health",
+        "-AdminUrl",
+        "https://authorization.example.com/admin/",
+        "-H5Url",
+        "https://authorization.example.com/p/"
+      ],
+      "localRequired": false
+    },
+    {
+      "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+      "generatedAt": "2026-08-06T18:37:31.146Z",
+      "gitRef": "WORKTREE:f44c84a1e52c",
+      "name": "recovery-drill",
+      "status": "NOT_RUN",
+      "exitCode": 0,
+      "startedAt": "2026-08-06T18:38:34.249Z",
+      "command": [
+        "powershell",
+        "-NoProfile",
+        "-File",
+        "deploy/recovery-drill.ps1",
+        "-ValidateOnly",
+        "-DrillDatabaseUrl",
+        "postgresql://drill:REDACTED@127.0.0.1:5432/authorization_recovery_drill",
+        "-DrillFileRoot",
+        "C:\\authorization-recovery\\files",
+        "-BackupRoot",
+        "C:\\authorization-recovery\\backups",
+        "-AllowedRoot",
+        "C:\\authorization-recovery"
+      ],
+      "localRequired": false
+    }
+  ]
+}

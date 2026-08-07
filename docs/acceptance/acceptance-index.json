@@ -1,0 +1,23 @@
+{
+  "generatedBy": "scripts/run-acceptance.mjs",
+  "releaseDecision": "RELEASE_BLOCKED",
+  "rule": "任何未解决 P0/P1、NOT_RUN 或未签署项均不得标记发布通过",
+  "items": [
+    {"id":1,"name":"发布门禁与证据捕获","executor":"Codex/local CI","executedAt":"2026-08-07T00:00:00+08:00","status":"PASS","signature":"AUTOMATED"},
+    {"id":2,"name":"完整生命周期 E2E","executor":null,"executedAt":null,"status":"NOT_RUN","signature":null},
+    {"id":3,"name":"真实 API 攻击矩阵","executor":null,"executedAt":null,"status":"NOT_RUN","signature":null},
+    {"id":4,"name":"审计原子性","executor":"Codex/local CI","executedAt":"2026-08-07T00:00:00+08:00","status":"PARTIAL","signature":null},
+    {"id":5,"name":"日志脱敏与 CORS","executor":"Codex/local CI","executedAt":"2026-08-07T00:00:00+08:00","status":"PASS","signature":"AUTOMATED"},
+    {"id":6,"name":"PDF 视觉基线","executor":null,"executedAt":null,"status":"NOT_RUN","signature":null},
+    {"id":7,"name":"健康检查与部署原子性","executor":"Codex/local CI","executedAt":"2026-08-07T00:00:00+08:00","status":"PARTIAL","signature":null},
+    {"id":8,"name":"生产 base path","executor":"Codex/local CI","executedAt":"2026-08-07T00:00:00+08:00","status":"PASS","signature":"AUTOMATED"},
+    {"id":9,"name":"备份恢复演练","executor":null,"executedAt":null,"status":"NOT_RUN","signature":null},
+    {"id":10,"name":"人工验收与创建耗时","executor":null,"executedAt":null,"status":"NOT_RUN","signature":null}
+  ],
+  "unresolved": [
+    {"severity":"P0","item":2,"reason":"专用 _test PostgreSQL 与 E2E API 未提供"},
+    {"severity":"P1","item":6,"reason":"锁定字体和 Chrome 的批准基线未采集"},
+    {"severity":"P1","item":9,"reason":"隔离恢复演练未执行"},
+    {"severity":"P1","item":10,"reason":"真实浏览器签署证据和五次耗时未提供"}
+  ]
+}

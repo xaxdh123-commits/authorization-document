@@ -1,0 +1,16 @@
+{
+  "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+  "generatedAt": "2026-08-06T18:37:31.146Z",
+  "gitRef": "WORKTREE:f44c84a1e52c",
+  "name": "create-case-timing",
+  "status": "NOT_RUN",
+  "exitCode": 0,
+  "startedAt": "2026-08-06T18:38:03.795Z",
+  "command": [
+    "pnpm.cmd",
+    "--filter",
+    "@auth/e2e",
+    "test:timing"
+  ],
+  "output": "\n> @auth/e2e@ test:timing C:\\Users\\Administrator\\Documents\\GitHub\\authorization-document\\tests\\e2e\n> node run-create-case-timing-safe.mjs\n\nGATE_STATUS=NOT_RUN\nDedicated timing fixture requires _test DB/API/H5, admin token, template version, and exactly three requirement versions\n"
+}

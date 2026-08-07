@@ -44,3 +44,40 @@ Phase 4
 | Error | Attempt | Resolution |
 |---|---:|---|
 | session-catchup.py 在 Windows 项目路径上生成非法 Claude 项目路径 | 1 | 已确认无旧的 task_plan.md；直接初始化本项目规划文件并记录错误 |
+# Task11 Quality Re-review (2026-08-06)
+
+- [x] Q1 generation-aware transactional outbox and queue reconciliation
+- [x] Q2 crash-safe PDF storage journal and recovery without re-render
+- [x] Q3 transactionally enforce 200MB retained evidence cap
+- [x] Q4 worker-thread PDF parser with hard timeout/termination
+- [x] Q5 verify/update existing pg-boss singleton queue policy
+- [x] Q6 full tests, Chrome, Prisma and diff verification
+
+# Production Deployment to 192.168.22.191 (2026-08-07)
+
+- [x] D1 inspect local Git/deploy state and identify GitHub publication gap
+- [ ] D2 sanitize deployable tree, create deployment branch, verify and push to GitHub
+- [ ] D3 inspect target Linux host and provision required runtime under /opt
+- [ ] D4 clone exact Git revision, configure environment/storage/database, migrate and build
+- [ ] D5 start API/worker with PM2 and serve Admin/H5 through Nginx
+- [ ] D6 run remote health/smoke checks and record exact deployed revision/endpoints
+
+Deployment safety decisions:
+- Preserve the existing dirty working tree; do not reset or discard user work.
+- Never commit supplied server credentials or generated production secrets.
+- Deploy an exact pushed branch/revision by Git clone as requested.
+- Do not claim release readiness unless remote runtime and health checks pass.
+
+Deployment errors:
+- Commit attempt 1 stopped before commit because `git diff --cached --check` found two Markdown trailing spaces and one extra EOF blank line; fix formatting and rerun the staged gate.
+
+# Task12 Spec Re-review Fixes (2026-08-07)
+
+- [x] T12.1 complete lifecycle E2E test body
+- [x] T12.2 abilities matrix and three quota attack levels
+- [x] T12.3 mandatory AuditWriter structure, migrate direct writes, download success/failure audit
+- [x] T12.4 SafeLogger allowlist and content-level redaction
+- [x] T12.5 real PDF visual baseline wiring with blocked-without-approved-baseline semantics
+- [x] T12.6 injectable recovery verifier and temporary mock coverage
+- [x] T12.7 acceptance gate tools, create timing spec, and eight-item acceptance index
+- [x] Full safe verification without non-test databases or real external systems

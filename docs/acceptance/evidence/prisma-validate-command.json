@@ -1,0 +1,14 @@
+{
+  "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+  "generatedAt": "2026-08-06T18:37:31.146Z",
+  "gitRef": "WORKTREE:f44c84a1e52c",
+  "name": "prisma-validate",
+  "status": "PASS",
+  "exitCode": 0,
+  "startedAt": "2026-08-06T18:38:17.857Z",
+  "command": [
+    "pnpm.cmd",
+    "prisma:validate"
+  ],
+  "output": "\n> authorization-document@ prisma:validate C:\\Users\\Administrator\\Documents\\GitHub\\authorization-document\n> node scripts/prisma-schema-check.mjs validate\n\nPrisma schema loaded from prisma\\schema.prisma\nThe schema at prisma\\schema.prisma is valid 🚀\n"
+}

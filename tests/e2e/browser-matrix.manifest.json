@@ -1,0 +1,6 @@
+{
+  "status": "NOT_RUN",
+  "reason": "尚未提供两代桌面 Chrome、两代 Android Chrome 和专用 _test 环境；未伪造版本或 PASS 证据",
+  "checkedAt": null,
+  "projects": ["desktop-chrome-current", "desktop-chrome-previous", "android-chrome-current", "android-chrome-previous"]
+}

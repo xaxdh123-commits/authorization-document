@@ -1,3 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { CaseDetailPage } from './CaseDetailPage';
-test('renders detail tabs', () => { render(<CaseDetailPage />); expect(screen.getByRole('tab', { name: 'Overview' })).toBeInTheDocument(); expect(screen.getByRole('tab', { name: 'Materials' })).toBeInTheDocument(); expect(screen.getByRole('tab', { name: 'Questionnaire' })).toBeInTheDocument(); expect(screen.getByRole('tab', { name: 'Files' })).toBeInTheDocument(); });
+
+test('以中文渲染业务单详情页签', () => {
+  render(<CaseDetailPage />);
+  for (const name of ['基本信息', '物料明细', '客户问卷', '资料文件']) expect(screen.getByRole('tab', { name })).toBeInTheDocument();
+});

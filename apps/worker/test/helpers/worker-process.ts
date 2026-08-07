@@ -1,0 +1,3 @@
+import { spawn, type ChildProcess } from 'node:child_process';
+export function startWorkerProcess(input:{cwd:string;env:NodeJS.ProcessEnv;entry:string}){return spawn(process.execPath,[input.entry],{cwd:input.cwd,env:{...process.env,...input.env},stdio:['ignore','pipe','pipe']});}
+export async function stopWorkerProcess(child:ChildProcess){if(child.exitCode!==null)return;child.kill('SIGTERM');await new Promise<void>((resolve,reject)=>{const timer=setTimeout(()=>{child.kill('SIGKILL');reject(new Error('WORKER_GRACEFUL_SHUTDOWN_TIMEOUT'));},10_000);child.once('exit',()=>{clearTimeout(timer);resolve();});});}

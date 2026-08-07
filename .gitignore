@@ -4,3 +4,10 @@ dist/
 !.env.example
 coverage/
 prisma/*.db
+*.tsbuildinfo
+.preview-logs/
+.superpowers/
+.pnpm-store/
+tmp/
+test-results/
+playwright-report/

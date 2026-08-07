@@ -1,0 +1,16 @@
+{
+  "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+  "generatedAt": "2026-08-06T18:37:31.146Z",
+  "gitRef": "WORKTREE:f44c84a1e52c",
+  "name": "pdf-visual",
+  "status": "NOT_RUN",
+  "exitCode": 0,
+  "startedAt": "2026-08-06T18:38:32.919Z",
+  "command": [
+    "pnpm.cmd",
+    "--filter",
+    "@auth/worker",
+    "test:visual"
+  ],
+  "output": "\n> @auth/worker@0.1.0 test:visual C:\\Users\\Administrator\\Documents\\GitHub\\authorization-document\\apps\\worker\n> vitest run src/pdf/pdf.renderer.chrome.spec.ts src/pdf/pdf-visual-baseline.test.ts src/pdf/pdf-visual-baseline.integration.spec.ts && node scripts/pdf-visual-gate.mjs\n\n\n\u001b[1m\u001b[7m\u001b[36m RUN \u001b[39m\u001b[27m\u001b[22m \u001b[36mv2.1.9 \u001b[39m\u001b[90mC:/Users/Administrator/Documents/GitHub/authorization-document/apps/worker\u001b[39m\n\n \u001b[32m✓\u001b[39m src/pdf/pdf-visual-baseline.test.ts \u001b[2m(\u001b[22m\u001b[2m4 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[90m 15\u001b[2mms\u001b[22m\u001b[39m\n \u001b[2m\u001b[90m↓\u001b[39m\u001b[22m src/pdf/pdf-visual-baseline.integration.spec.ts \u001b[2m(\u001b[22m\u001b[2m1 test\u001b[22m\u001b[2m | \u001b[22m\u001b[33m1 skipped\u001b[39m\u001b[2m)\u001b[22m\n \u001b[2m\u001b[90m↓\u001b[39m\u001b[22m src/pdf/pdf.renderer.chrome.spec.ts \u001b[2m(\u001b[22m\u001b[2m2 tests\u001b[22m\u001b[2m | \u001b[22m\u001b[33m2 skipped\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m1 passed\u001b[39m\u001b[22m\u001b[2m | \u001b[22m\u001b[33m2 skipped\u001b[39m\u001b[90m (3)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m4 passed\u001b[39m\u001b[22m\u001b[2m | \u001b[22m\u001b[33m3 skipped\u001b[39m\u001b[90m (7)\u001b[39m\n\u001b[2m   Start at \u001b[22m 02:38:32\n\u001b[2m   Duration \u001b[22m 548ms\u001b[2m (transform 120ms, setup 0ms, collect 603ms, tests 15ms, environment 0ms, prepare 264ms)\u001b[22m\n\nGATE_STATUS=NOT_RUN\nPDF visual baseline unavailable: Approved baseline PNGs must be captured in the locked release environment\n"
+}

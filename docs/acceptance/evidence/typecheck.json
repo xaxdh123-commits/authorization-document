@@ -1,0 +1,11 @@
+{
+  "name": "typecheck",
+  "status": "PASS",
+  "exitCode": 0,
+  "startedAt": "2026-08-06T17:03:37.375Z",
+  "command": [
+    "pnpm.cmd",
+    "typecheck"
+  ],
+  "output": "\n> authorization-document@ typecheck C:\\Users\\Administrator\\Documents\\GitHub\\authorization-document\n> pnpm -r typecheck\n\nScope: 9 of 10 workspace projects\napps/admin typecheck$ tsc -b\npackages/config typecheck$ tsc --noEmit\npackages/contracts typecheck$ tsc --noEmit\npackages/storage typecheck$ tsc --noEmit\npackages/config typecheck: Done\npackages/storage typecheck: Done\npackages/contracts typecheck: Done\napps/admin typecheck: Done\napps/h5 typecheck$ tsc -b\npackages/template-engine typecheck$ tsc --noEmit\npackages/template-engine typecheck: Done\napps/h5 typecheck: Done\napps/api typecheck$ tsc --noEmit\napps/worker typecheck$ tsc --noEmit\napps/worker typecheck: Done\napps/api typecheck: Done\n"
+}

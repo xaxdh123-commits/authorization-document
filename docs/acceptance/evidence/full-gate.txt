@@ -1,0 +1,23 @@
+runId=20bb8ca8-248c-4e03-885c-f9d1a088c965
+generatedAt=2026-08-06T18:37:31.146Z
+gitRef=WORKTREE:f44c84a1e52c
+localCodeStatus=LOCAL_CODE_PASS
+releaseStatus=RELEASE_BLOCKED
+release-tools=PASS exit=0
+deploy-script-mocks=PASS exit=0
+typecheck=PASS exit=0
+test=PASS exit=0
+integration=NOT_RUN exit=0
+e2e=NOT_RUN exit=0
+browser-matrix=NOT_RUN exit=0
+create-case-timing=NOT_RUN exit=0
+build=PASS exit=0
+dist-base=PASS exit=0
+prisma-validate=PASS exit=0
+prisma-generate=PASS exit=0
+format=PASS exit=0
+lint=PASS exit=0
+pdf-visual=NOT_RUN exit=0
+manual-browser=NOT_RUN exit=0
+deployment-smoke=NOT_RUN exit=0
+recovery-drill=NOT_RUN exit=0

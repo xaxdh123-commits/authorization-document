@@ -6,8 +6,8 @@ import type { AuthClient } from '../api/client';
 
 const denied: AuthClient = { getSession: async () => ({ userId: 'u1', roleKey: 'staff', abilities: [] }) };
 
-test('shows forbidden page when required capability is absent', async () => {
+test('缺少所需能力时以中文显示禁止访问页面', async () => {
   render(<AuthProvider client={denied}><MemoryRouter initialEntries={['/secret']}><Routes><Route path="/secret" element={<RouteGuard ability="secret:read"><div>secret</div></RouteGuard>} /></Routes></MemoryRouter></AuthProvider>);
-  expect(await screen.findByRole('heading', { name: 'Forbidden' })).toBeInTheDocument();
+  expect(await screen.findByRole('heading', { name: '没有访问权限' })).toBeInTheDocument();
   expect(screen.queryByText('secret')).not.toBeInTheDocument();
 });

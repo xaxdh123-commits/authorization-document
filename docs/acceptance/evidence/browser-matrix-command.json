@@ -1,0 +1,14 @@
+{
+  "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+  "generatedAt": "2026-08-06T18:37:31.146Z",
+  "gitRef": "WORKTREE:f44c84a1e52c",
+  "name": "browser-matrix",
+  "status": "NOT_RUN",
+  "exitCode": 0,
+  "startedAt": "2026-08-06T18:38:03.100Z",
+  "command": [
+    "pnpm.cmd",
+    "test:browser-matrix"
+  ],
+  "output": "\n> authorization-document@ test:browser-matrix C:\\Users\\Administrator\\Documents\\GitHub\\authorization-document\n> pnpm --filter @auth/e2e test:browser-matrix\n\n\n> @auth/e2e@ test:browser-matrix C:\\Users\\Administrator\\Documents\\GitHub\\authorization-document\\tests\\e2e\n> node run-browser-matrix-safe.mjs\n\nGATE_STATUS=NOT_RUN\nThe signed four-browser matrix environment is not configured\n"
+}

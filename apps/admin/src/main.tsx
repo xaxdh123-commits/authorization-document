@@ -5,4 +5,4 @@ import { AuthProvider } from './auth/AuthProvider';
 import { createApiClient } from './api/client';
 import './styles.css';
 const client = createApiClient();
-createRoot(document.getElementById('root')!).render(<AuthProvider client={client}><BrowserRouter><App /></BrowserRouter></AuthProvider>);
+createRoot(document.getElementById('root')!).render(<AuthProvider client={client}><BrowserRouter basename={import.meta.env.BASE_URL}><App /></BrowserRouter></AuthProvider>);

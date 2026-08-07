@@ -64,3 +64,36 @@
 | What's the goal? | 产出可执行且测试优先的完整实施计划 |
 | What have I learned? | 见 findings.md |
 | What have I done? | 初始化规划文件并确认规格已批准 |
+# Task11 quality re-review (2026-08-06)
+
+- Received 4 Important + 1 Minor follow-up.
+- Root causes recorded; RED tests and schema changes are next.
+- Tool error: Windows `rg` glob for `node_modules/.pnpm/pg-boss*` was invalid; resolved by enumerating the concrete pnpm package directory (installed version is 10.4.2, not lockfile assumption 10.3.2).
+- Q4 RED: hung parser test failed because worker API did not exist. GREEN: pdf-lib now runs in worker_threads; timeout terminates worker. Target 4/4 and storage typecheck pass.
+- Q5 RED: existing non-singleton queue test failed because reconciliation helper did not exist. GREEN: worker/API inspect queues, create missing queues, update mismatched policy and verify it; target 2/2 and worker typecheck pass.
+- Q1 GREEN: generation outbox retry 2/2; durable publisher 3/3; real pg-boss failed-generation integration body compiles and safely skips without TEST_DATABASE_URL.
+- Q2 GREEN: deterministic staging write-once 3/3; handler/repository recovery 13/13; failpoint SIGKILL integration body compiles and safely skips without TEST_DATABASE_URL.
+- Q3 GREEN: case FOR UPDATE + retained-cap unit 7/7; concurrent capacity integration body compiles and safely skips without TEST_DATABASE_URL.
+- Full package tests: API 192/192, Worker 23 passed + 3 environment skips, Storage 15/15, Template 15/15.
+- Test invocation error: default API Jest excludes `*.integration-spec.ts`; resolved by using `test/jest-integration.json`.
+- Final verification: root typecheck/build pass; Prisma validate pass; real Chrome 150 2/2; diff-check pass. Independent review agent could not be added because concurrency slots remained full.
+
+# Task12 spec re-review (2026-08-07)
+
+- Started seven bounded compliance fixes from the independent review.
+- Safety boundary: do not connect to non-test databases or real external systems; external evidence must remain NOT_RUN/RELEASE_BLOCKED when unavailable.
+- Method: RED test first for every behavior change, then minimal implementation and full local verification.
+- GREEN: lifecycle and attack acceptance contracts 11/11; lifecycle now includes replacement upload, re-signing, final completion and automatic link closure.
+- GREEN: shared AuditWriter normalization/direct-write migration, post-stream success/failure audit, and content-aware SafeLogger; API full suite 203/203.
+- GREEN: PDF raster baseline verifier enforces 144 DPI, exact pages, baseline hashes and <=0.5% pixel difference; READY mode now runs the 20-material fixture through real Chromium and Poppler and requires fresh all-page evidence, while an absent approved baseline is explicitly NOT_RUN and release-blocking.
+- GREEN: recovery drill temp mock validates restored business/audit/history/final-PDF invariants, PDF recovery <=60 seconds, zero duplicates, API/worker restart, RPO <=24h and RTO <=8h.
+- GREEN: release tool self-tests 4/4, deploy script temp mock, worker suite 28 passed with 3 environment skips, workspace typecheck and diff-check.
+- External `_test` DB/browser/approved visual-baseline evidence was deliberately not fabricated and remains NOT_RUN/RELEASE_BLOCKED until its controlled environment is provided.
+
+# Deployment session (2026-08-07)
+
+- User authorized deployment to `192.168.22.191` as root under `/opt`, using GitHub clone and PM2.
+- Inspected Git state, deployment files, environment contract, and available SSH clients.
+- Found that the full implementation is not yet committed/pushed and the GitHub remote currently exposes no branch; deployment publication is the active phase.
+- Error recorded: planning `session-catchup.py` produced WinError 123 for the Windows drive path; existing planning files were recovered directly.
+- Commit attempt 1 produced no commit: staged diff gate found three whitespace defects. Removed the generated Playwright last-run file from the index and fixed the reported whitespace before retrying.

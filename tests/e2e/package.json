@@ -1,0 +1,19 @@
+{
+  "name": "@auth/e2e",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run prerequisites.spec.ts release-security.spec.ts",
+    "test:e2e": "node run-e2e-safe.mjs",
+    "test:timing": "node run-create-case-timing-safe.mjs",
+    "test:browser-matrix": "node run-browser-matrix-safe.mjs",
+    "validate:manual-matrix": "node run-manual-matrix-safe.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.54.2",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^2.0.0"
+  }
+}

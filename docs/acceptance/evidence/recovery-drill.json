@@ -1,0 +1,22 @@
+{
+  "name": "recovery-drill",
+  "status": "NOT_RUN",
+  "exitCode": 0,
+  "startedAt": "2026-08-06T17:04:28.838Z",
+  "command": [
+    "powershell",
+    "-NoProfile",
+    "-File",
+    "deploy/recovery-drill.ps1",
+    "-ValidateOnly",
+    "-DrillDatabaseUrl",
+    "postgresql://drill:REDACTED@127.0.0.1:5432/authorization_recovery_drill",
+    "-DrillFileRoot",
+    "C:\\authorization-recovery\\files",
+    "-BackupRoot",
+    "C:\\authorization-recovery\\backups",
+    "-AllowedRoot",
+    "C:\\authorization-recovery"
+  ],
+  "output": "VALID DATABASE=authorization_recovery_drill\r\nVALID FILE_ROOT=C:\\authorization-recovery\\files\r\nVALID BACKUP_ROOT=C:\\authorization-recovery\\backups\r\nTARGET RPO<=24h RTO<=8h\r\nDRY_RUN validation only; no backup, restore, restart, or write\r\n"
+}

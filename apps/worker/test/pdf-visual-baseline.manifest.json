@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "dpi": 144,
+  "chromeMajor": "REQUIRED_AT_CAPTURE",
+  "fontSha256": "REQUIRED_AT_CAPTURE",
+  "platform": "win32",
+  "fixtures": ["twenty-materials-long-text-pagination-signature-bounds"],
+  "status": "NOT_RUN",
+  "reason": "Approved baseline PNGs must be captured in the locked release environment"
+}

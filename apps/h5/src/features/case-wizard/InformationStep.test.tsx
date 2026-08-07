@@ -1,2 +1,2 @@
 import { render, screen } from '@testing-library/react'; import { InformationStep } from './InformationStep';
-test('renders editable information fields', () => { render(<InformationStep />); expect(screen.getByLabelText('Full name')).toBeInTheDocument(); expect(screen.getByLabelText('Phone')).toBeInTheDocument(); });
+test('renders editable information fields', () => { render(<InformationStep />); expect(screen.getByLabelText(/联系人姓名/)).toBeInTheDocument(); expect(screen.getByLabelText(/手机号码/)).toBeInTheDocument(); });

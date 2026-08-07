@@ -1,0 +1,11 @@
+{
+  "name": "prisma-validate",
+  "status": "PASS",
+  "exitCode": 0,
+  "startedAt": "2026-08-06T17:04:11.765Z",
+  "command": [
+    "pnpm.cmd",
+    "prisma:validate"
+  ],
+  "output": "\n> authorization-document@ prisma:validate C:\\Users\\Administrator\\Documents\\GitHub\\authorization-document\n> node scripts/prisma-schema-check.mjs validate\n\nPrisma schema loaded from prisma\\schema.prisma\nThe schema at prisma\\schema.prisma is valid 🚀\n"
+}

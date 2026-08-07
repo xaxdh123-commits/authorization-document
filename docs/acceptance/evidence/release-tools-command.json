@@ -1,0 +1,14 @@
+{
+  "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+  "generatedAt": "2026-08-06T18:37:31.146Z",
+  "gitRef": "WORKTREE:f44c84a1e52c",
+  "name": "release-tools",
+  "status": "PASS",
+  "exitCode": 0,
+  "startedAt": "2026-08-06T18:37:31.907Z",
+  "command": [
+    "pnpm.cmd",
+    "test:release-tools"
+  ],
+  "output": "\n> authorization-document@ test:release-tools C:\\Users\\Administrator\\Documents\\GitHub\\authorization-document\n> node --test scripts/run-and-capture.test.mjs scripts/run-acceptance.test.mjs\n\nTAP version 13\n# Subtest: acceptance runner gates its own release tools and deploy mocks\nok 1 - acceptance runner gates its own release tools and deploy mocks\n  ---\n  duration_ms: 3.6737\n  ...\n# Subtest: successful skipped work is NOT_RUN, never PASS\nok 2 - successful skipped work is NOT_RUN, never PASS\n  ---\n  duration_ms: 1.141\n  ...\n# Subtest: only executed success is PASS\nok 3 - only executed success is PASS\n  ---\n  duration_ms: 0.1198\n  ...\n# Subtest: nonzero commands are always failures even if their text mentions NOT_RUN\nok 4 - nonzero commands are always failures even if their text mentions NOT_RUN\n  ---\n  duration_ms: 0.1819\n  ...\n1..4\n# tests 4\n# suites 0\n# pass 4\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 57.9339\n"
+}

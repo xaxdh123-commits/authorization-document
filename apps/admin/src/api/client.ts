@@ -1,41 +1,38 @@
-export type AuthSession = { userId: string; roleKey: string; abilities: string[] };
+import { demoCases, demoReviews, demoStatusCounts } from './demoData';
+export type AuthSession = { userId: string; roleKey: string; abilities: string[]; displayName?: string; roleName?: string };
 export interface AuthClient { getSession(): Promise<AuthSession>; }
 import type { DashboardData } from '../features/dashboard/DashboardPage';
 import type { CaseSummary } from '../features/cases/CaseListPage';
 import type { ReviewSummary } from '../features/reviews/ReviewQueuePage';
 
 const apiBase = (import.meta.env.VITE_API_BASE_URL ?? (import.meta.env.DEV ? 'http://127.0.0.1:3000' : '/api')).replace(/\/$/, '');
-export function getAccessToken() {
-  const query = new URLSearchParams(window.location.search);
-  return query.get('access_token') ?? query.get('token') ?? localStorage.getItem('access_token') ?? localStorage.getItem('token');
-}
+export const isDemoMode = () => import.meta.env.VITE_DEMO_MODE === 'true' || new URLSearchParams(window.location.search).get('demo') === '1';
+export function getAccessToken() { const query = new URLSearchParams(window.location.search); return query.get('access_token') ?? query.get('token') ?? localStorage.getItem('access_token') ?? localStorage.getItem('token'); }
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
-  const headers = new Headers(init.headers);
-  headers.set('Content-Type', 'application/json');
-  const token = getAccessToken();
-  if (token) headers.set('Authorization', `Bearer ${token}`);
+  const headers = new Headers(init.headers); headers.set('Content-Type', 'application/json');
+  const token = getAccessToken(); if (token) headers.set('Authorization', `Bearer ${token}`);
   const response = await fetch(`${apiBase}${path}`, { ...init, headers });
-  if (!response.ok) throw new Error(`API request failed (${response.status})`);
+  if (!response.ok) throw new Error(`接口请求失败（${response.status}）`);
   return response.json() as Promise<T>;
 }
-export type CaseCreateInput = {
-  customerName: string; contactName: string; factoryDepartment: string;
-  materials: Array<{ name: string; specification: string; quantity: number; material: string; craft: string; optionalPrice?: number }>;
-  templateVersionId: string; requirements?: string[];
-};
+export type CaseCreateInput = { customerName: string; contactName: string; factoryDepartment: string; materials: Array<{ name: string; specification: string; quantity: number; material: string; craft: string; optionalPrice?: number }>; templateVersionId: string; requirements?: string[]; linkExpiresInDays?: number; quoteReference?: string };
+const wait = <T,>(value: T) => new Promise<T>(resolve => setTimeout(() => resolve(value), 160));
 export function createApiClient() {
+  const demo = isDemoMode();
   return {
+    demo,
     async getSession(): Promise<AuthSession> {
-      const result = await request<{ user?: { userId: number; roles?: Array<{ roleKey: string }> }; permissions?: string[] }>('/auth/getInfo');
-      const user = result.user;
-      return { userId: String(user?.userId ?? ''), roleKey: user?.roles?.[0]?.roleKey ?? 'common', abilities: result.permissions ?? [] };
+      if (demo) return wait({ userId: '1', roleKey: 'admin', displayName: '若依', roleName: '超级管理员', abilities: ['*:*:*'] });
+      const result = await request<{ user?: { userId: number; nickName?: string; roles?: Array<{ roleKey: string; roleName?: string }> }; permissions?: string[] }>('/auth/getInfo');
+      const user = result.user; const firstRole = user?.roles?.[0];
+      return { userId: String(user?.userId ?? ''), roleKey: firstRole?.roleKey ?? 'common', displayName: user?.nickName ?? '当前用户', roleName: firstRole?.roleName ?? '普通用户', abilities: result.permissions ?? [] };
     },
-    createCase: (input: CaseCreateInput) => request<{ id: string }>('/cases', { method: 'POST', body: JSON.stringify(input) }),
-    listCases: () => request<CaseSummary[]>('/cases'),
+    createCase: (input: CaseCreateInput) => demo ? wait({ id: `CASE-${Date.now().toString().slice(-6)}` }) : request<{ id: string }>('/cases', { method: 'POST', body: JSON.stringify(input) }),
+    listCases: (): Promise<CaseSummary[]> => demo ? wait(demoCases) : request('/cases'),
     async getDashboard(): Promise<DashboardData> {
-      const result = await request<{ draft: number; awaitingCustomer: number; pendingReview: number; needsSupplement: number; completed: number }>('/dashboard');
-      return { statuses: { draft: result.draft, pending: result.pendingReview, overdue: result.needsSupplement }, recent: [], overdue: [] };
+      if (demo) return wait({ statuses: demoStatusCounts, recent: demoCases.slice(0, 5), overdue: demoCases.slice(3, 5) });
+      return request('/dashboard');
     },
-    listReviews: () => request<ReviewSummary[]>('/reviews'),
+    listReviews: (): Promise<ReviewSummary[]> => demo ? wait(demoReviews) : request('/reviews'),
   };
 }

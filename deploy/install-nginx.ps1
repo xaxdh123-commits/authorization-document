@@ -1,0 +1,11 @@
+[CmdletBinding()]
+param([Parameter(Mandatory)][string]$Template,[Parameter(Mandatory)][string]$NginxRoot,[Parameter(Mandatory)][string]$StaticRoot,[Parameter(Mandatory)][string]$CertificatePath,[Parameter(Mandatory)][string]$CertificateKeyPath,[string]$NginxExecutable,[string]$ConfigPath,[switch]$Execute,[switch]$Approved)
+$ErrorActionPreference='Stop';$templatePath=(Resolve-Path -LiteralPath $Template).Path;$static=[IO.Path]::GetFullPath($StaticRoot)
+if(-not(Test-Path -LiteralPath $CertificatePath -PathType Leaf)){throw 'TLS certificate does not exist'};if(-not(Test-Path -LiteralPath $CertificateKeyPath -PathType Leaf)){throw 'TLS private key does not exist'}
+$rendered=(Get-Content -Raw -LiteralPath $templatePath).Replace('C:/authorization/www',$static.Replace('\','/')).Replace('C:/authorization/tls/fullchain.pem',$CertificatePath.Replace('\','/')).Replace('C:/authorization/tls/private.key',$CertificateKeyPath.Replace('\','/'))
+if($rendered-notmatch'ssl_protocols TLSv1\.2 TLSv1\.3'-or$rendered-notmatch'client_max_body_size'){throw 'Nginx template is missing TLS or upload limits'}
+Write-Output 'VALID Nginx template, TLS files, and static root';if(-not $Execute){Write-Output 'DRY_RUN no config write, nginx -t, or reload';exit 0};if(-not $Approved){throw 'Execute requires -Approved'}
+if(-not $NginxExecutable-or-not $ConfigPath){throw 'Execute requires explicit -NginxExecutable and -ConfigPath'};$nginx=(Resolve-Path -LiteralPath $NginxExecutable).Path;$config=[IO.Path]::GetFullPath($ConfigPath);$root=[IO.Path]::GetFullPath($NginxRoot)
+if(-not $config.StartsWith($root.TrimEnd('\')+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'ConfigPath must be below NginxRoot'}
+$candidate="$config.candidate";$backup="$config.backup";Set-Content -LiteralPath $candidate -Value $rendered -Encoding UTF8
+try{& $nginx -t -c $candidate;if($LASTEXITCODE-ne 0){throw 'nginx -t failed'};if(Test-Path -LiteralPath $config){Copy-Item -LiteralPath $config -Destination $backup -Force};Move-Item -LiteralPath $candidate -Destination $config -Force;& $nginx -s reload;if($LASTEXITCODE-ne 0){throw 'nginx reload failed'};Write-Output 'NGINX_CONFIG_INSTALLED'}catch{if(Test-Path -LiteralPath $backup){Copy-Item -LiteralPath $backup -Destination $config -Force;& $nginx -s reload|Out-Null};throw}

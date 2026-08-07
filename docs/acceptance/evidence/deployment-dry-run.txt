@@ -1,0 +1,16 @@
+2026-08-07 Asia/Shanghai
+VALID FILE_ROOT=C:\authorization\data
+VALID BACKUP_ROOT=D:\authorization-backups
+PLAN pg_dump custom format; incremental file copy; SHA-256 manifest
+DRY_RUN no database read and no file copy
+VALID DATABASE=authorization_recovery_drill
+VALID FILE_ROOT=C:\authorization-recovery\files
+VALID BACKUP_ROOT=C:\authorization-recovery\backups
+TARGET RPO<=24h RTO<=8h
+DRY_RUN validation only; no backup, restore, restart, or write
+VALID DAILY_BACKUP_AT=02:00
+VALID RECOVERY_MONTHS=1,4,7,10
+DRY_RUN no scheduled task, service account, or alert created
+VALID API https://authorization.example.com/api/health
+VALID Admin https://authorization.example.com/admin/
+VALID H5 https://authorization.example.com/p/

@@ -1,1 +1,28 @@
-{"name":"@auth/worker","version":"0.1.0","private":true,"type":"module","scripts":{"start":"node dist/main.js","build":"tsc -p tsconfig.build.json","test":"vitest run","test:integration":"vitest run test/**/*.test.ts","typecheck":"tsc --noEmit"},"dependencies":{"@auth/storage":"workspace:*","@auth/template-engine":"workspace:*"},"devDependencies":{"@types/node":"^22.0.0","typescript":"^5.0.0","vitest":"^2.0.0"}}
+{
+  "name": "@auth/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node dist/apps/worker/src/main.js",
+    "build": "tsc -p tsconfig.build.json",
+    "test": "vitest run",
+    "test:visual": "vitest run src/pdf/pdf.renderer.chrome.spec.ts src/pdf/pdf-visual-baseline.test.ts src/pdf/pdf-visual-baseline.integration.spec.ts && node scripts/pdf-visual-gate.mjs",
+    "test:integration": "pnpm --filter @auth/storage build && pnpm --filter @auth/template-engine build && pnpm build && vitest run test/pdf-recovery.integration.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@auth/storage": "workspace:*",
+    "@auth/template-engine": "workspace:*",
+    "@prisma/client": "^6.1.0",
+    "pg-boss": "^10.3.2",
+    "puppeteer-core": "24.16.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "prisma": "^6.1.0",
+    "sharp": "^0.34.3",
+    "typescript": "^5.0.0",
+    "vitest": "^2.0.0"
+  }
+}

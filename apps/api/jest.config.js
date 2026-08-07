@@ -1,1 +1,1 @@
-module.exports={preset:'ts-jest',testEnvironment:'node',moduleNameMapper:{'^@auth/contracts$':'<rootDir>/../../packages/contracts/src/index.ts'}};
+module.exports={preset:'ts-jest',testEnvironment:'node',moduleNameMapper:{'^(\\.{1,2}/.*)\\.js$':'$1','^@auth/contracts$':'<rootDir>/../../packages/contracts/src/index.ts','^@auth/storage$':'<rootDir>/../../packages/storage/src/index.ts','^@auth/template-engine$':'<rootDir>/../../packages/template-engine/src/index.ts'}};

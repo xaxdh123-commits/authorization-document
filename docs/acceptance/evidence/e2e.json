@@ -1,0 +1,11 @@
+{
+  "name": "e2e",
+  "status": "NOT_RUN",
+  "exitCode": 0,
+  "startedAt": "2026-08-06T17:03:55.884Z",
+  "command": [
+    "pnpm.cmd",
+    "test:e2e"
+  ],
+  "output": "\n> authorization-document@ test:e2e C:\\Users\\Administrator\\Documents\\GitHub\\authorization-document\n> pnpm --filter @auth/e2e test:e2e\n\n\n> @auth/e2e@ test:e2e C:\\Users\\Administrator\\Documents\\GitHub\\authorization-document\\tests\\e2e\n> playwright test --config playwright.config.ts\n\n\nRunning 5 tests using 1 worker\n\n  -  1 api-attacks.e2e.spec.ts:16:3 › 真实 API 越权与输入攻击矩阵 › 角色仅按 abilities 授权，不按数据行范围过滤\n  -  2 api-attacks.e2e.spec.ts:29:3 › 真实 API 越权与输入攻击矩阵 › 伪造、过期和已撤销的公开令牌均不可访问\n  -  3 api-attacks.e2e.spec.ts:37:3 › 真实 API 越权与输入攻击矩阵 › 跨业务单 fileId、路径穿越、MIME 伪装和配额攻击被拒绝且响应不泄密\n  -  4 lifecycle-history.e2e.spec.ts:14:3 › 确定性业务单生命周期、历史与断链 › 三文件、自动保存恢复、驳回重签、历史下载与一秒内关链\n  -  5 workflow.e2e.spec.ts:23:1 › 委托生产授权全链路 › 模板—业务单—客户填写签署—驳回补件—最终 PDF—关闭访问全链路\n\n  5 skipped\n"
+}

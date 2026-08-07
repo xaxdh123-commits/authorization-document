@@ -1,0 +1,14 @@
+{
+  "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+  "generatedAt": "2026-08-06T18:37:31.146Z",
+  "gitRef": "WORKTREE:f44c84a1e52c",
+  "name": "integration",
+  "status": "NOT_RUN",
+  "exitCode": 0,
+  "startedAt": "2026-08-06T18:38:01.043Z",
+  "command": [
+    "pnpm.cmd",
+    "test:integration"
+  ],
+  "output": "\n> authorization-document@ test:integration C:\\Users\\Administrator\\Documents\\GitHub\\authorization-document\n> node scripts/run-integration-safe.mjs\n\nGATE_STATUS=NOT_RUN\nIntegration database is not configured; no database was touched\n"
+}

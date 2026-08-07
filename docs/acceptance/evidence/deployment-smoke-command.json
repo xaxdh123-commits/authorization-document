@@ -1,0 +1,23 @@
+{
+  "runId": "20bb8ca8-248c-4e03-885c-f9d1a088c965",
+  "generatedAt": "2026-08-06T18:37:31.146Z",
+  "gitRef": "WORKTREE:f44c84a1e52c",
+  "name": "deployment-smoke",
+  "status": "NOT_RUN",
+  "exitCode": 0,
+  "startedAt": "2026-08-06T18:38:34.102Z",
+  "command": [
+    "powershell",
+    "-NoProfile",
+    "-File",
+    "deploy/smoke.ps1",
+    "-ValidateOnly",
+    "-ApiUrl",
+    "https://authorization.example.com/api/health",
+    "-AdminUrl",
+    "https://authorization.example.com/admin/",
+    "-H5Url",
+    "https://authorization.example.com/p/"
+  ],
+  "output": "VALID Admin https://authorization.example.com/admin/\r\nVALID H5 https://authorization.example.com/p/\r\nVALID API https://authorization.example.com/api/health\r\nGATE_STATUS=NOT_RUN\r\nValidation only; no HTTP smoke requests executed\r\n"
+}

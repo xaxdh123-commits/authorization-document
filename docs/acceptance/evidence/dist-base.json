@@ -1,0 +1,11 @@
+{
+  "name": "dist-base",
+  "status": "PASS",
+  "exitCode": 0,
+  "startedAt": "2026-08-06T17:04:10.000Z",
+  "command": [
+    "C:\\nvm4w\\nodejs\\node.exe",
+    "scripts/verify-dist-base.mjs"
+  ],
+  "output": "dist asset base paths verified\n"
+}

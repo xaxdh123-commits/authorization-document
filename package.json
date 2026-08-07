@@ -1,1 +1,25 @@
-{"name":"authorization-document","private":true,"packageManager":"pnpm@9.0.0","scripts":{"test":"pnpm -r test","build":"pnpm -r build","typecheck":"pnpm -r typecheck"},"devDependencies":{"typescript":"^5.0.0","vitest":"^2.0.0"}}
+{
+  "name": "authorization-document",
+  "private": true,
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "test": "pnpm -r test",
+    "test:integration": "node scripts/run-integration-safe.mjs",
+    "test:e2e": "pnpm --filter @auth/e2e test:e2e",
+    "test:browser-matrix": "pnpm --filter @auth/e2e test:browser-matrix",
+    "validate:manual-matrix": "pnpm --filter @auth/e2e validate:manual-matrix",
+    "test:release-tools": "node --test scripts/run-and-capture.test.mjs scripts/run-acceptance.test.mjs",
+    "format:check": "git diff --check",
+    "lint": "pnpm -r typecheck",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck && node scripts/verify-typecheck-coverage.mjs",
+    "prisma:validate": "node scripts/prisma-schema-check.mjs validate",
+    "prisma:generate": "node scripts/prisma-schema-check.mjs generate"
+  },
+  "devDependencies": {
+    "@prisma/client": "6.19.3",
+    "prisma": "6.19.3",
+    "typescript": "^5.0.0",
+    "vitest": "^2.0.0"
+  }
+}

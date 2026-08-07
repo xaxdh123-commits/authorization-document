@@ -23,7 +23,7 @@ export type StoredTemplate = {
 };
 
 const AUTHORIZATION_REQUIREMENT: StoredRequirement = {
-  key: 'authorization_letter', label: '授权书', type: 'FILE', required: true, system: true,
+  key: 'authorization_letter', label: '授权书', type: 'FILE', required: true, sensitive: true, system: true,
 };
 
 @Injectable()

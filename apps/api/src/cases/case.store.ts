@@ -13,14 +13,17 @@ export type StoredCase = CaseCreate & {
   signingMode: 'STANDARD';
   createdAt: string;
   updatedAt: string;
+  ownerUserId?: string;
+  departmentId?: string;
+  reviewerUserId?: string;
 };
 
 @Injectable()
 export class CaseStore {
   private readonly cases = new Map<string, StoredCase>();
-  constructor(private readonly templates: TemplateStore = new TemplateStore()) {}
+  constructor(private readonly templates: TemplateStore) {}
 
-  create(input: CaseCreate): StoredCase {
+  create(input: CaseCreate, scope: { ownerUserId?: string; departmentId?: string; reviewerUserId?: string } = {}): StoredCase {
     if (!this.templates.hasVersion(input.templateVersionId)) throw new BadRequestException('template version not found');
     const now = new Date().toISOString();
     const value: StoredCase = {
@@ -33,6 +36,7 @@ export class CaseStore {
       signingMode: 'STANDARD',
       createdAt: now,
       updatedAt: now,
+      ...scope,
     };
     this.cases.set(value.id, value);
     return value;

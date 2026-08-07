@@ -1,16 +1,20 @@
-import { createReadStream } from 'node:fs';
-import { access, rm } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { createReadStream,createWriteStream } from 'node:fs';
+import { access, link, mkdir, rm, stat } from 'node:fs/promises';
 import path from 'node:path';
-import { writeAtomically } from './atomic-file-writer.js';
-import { storageKeyFor } from './file-policy.js';
-import type { Storage, StoredFile } from './storage.js';
+import { writeAtomically } from './atomic-file-writer';
+import { contentAddressedStorageKey, storageKeyFor } from './file-policy';
+import type { Storage, StoredFile } from './storage';
 import type { Readable } from 'node:stream';
 
 export class LocalStorage implements Storage {
   constructor(private readonly root: string) {}
   private safe(key: string): string { const normalized=path.posix.normalize(key.replaceAll('\\','/')); if (normalized.startsWith('../') || normalized==='..' || path.isAbsolute(normalized)) throw new Error('STORAGE_KEY_INVALID'); return path.join(this.root, normalized); }
   async write(input: Readable, fileId: string, originalName: string): Promise<StoredFile> { const storageKey=storageKeyFor(fileId, originalName); const sha256=await writeAtomically(this.root, storageKey, input); return {storageKey,relativePath:storageKey,sha256}; }
+  async writeOnce(input:Readable,storageKey:string,maxBytes:number):Promise<StoredFile>{if(!storageKey.replaceAll('\\','/').startsWith('staging/')||!storageKey.endsWith('.stage'))throw new Error('STAGING_KEY_INVALID');if(await this.exists(storageKey)){const existing=await this.readWithLimit(storageKey,maxBytes);return{storageKey,relativePath:storageKey,sha256:existing.sha256};}const target=this.safe(storageKey);await mkdir(path.dirname(target),{recursive:true});const temp=`${target}.${crypto.randomUUID()}.tmp`;const hash=createHash('sha256');let size=0;try{await new Promise<void>((resolve,reject)=>{const out=createWriteStream(temp,{flags:'wx'});input.on('data',chunk=>{size+=Buffer.byteLength(chunk);if(size>maxBytes){input.destroy(new Error('STORAGE_WRITE_LIMIT_EXCEEDED'));return;}hash.update(chunk);});input.once('error',reject);out.once('error',reject);out.once('finish',resolve);input.pipe(out);});const sha256=hash.digest('hex');try{await link(temp,target);}catch(error:any){if(error?.code!=='EEXIST')throw error;const existing=await this.readWithLimit(storageKey,maxBytes);return{storageKey,relativePath:storageKey,sha256:existing.sha256};}return{storageKey,relativePath:storageKey,sha256};}finally{await rm(temp,{force:true});}}
+  async writeContentAddressed(input:Readable,sha256:string,extension:string):Promise<StoredFile>{const storageKey=contentAddressedStorageKey(sha256,extension);const target=this.safe(storageKey);await mkdir(path.dirname(target),{recursive:true});const temp=`${target}.${crypto.randomUUID()}.tmp`;const hash=createHash('sha256');try{await new Promise<void>((resolve,reject)=>{const out=createWriteStream(temp,{flags:'wx'});input.on('data',chunk=>hash.update(chunk));input.once('error',reject);out.once('error',reject);out.once('finish',resolve);input.pipe(out);});const actual=hash.digest('hex');if(actual!==sha256)throw new Error('CONTENT_ADDRESS_SHA_MISMATCH');try{await link(temp,target);}catch(error:any){if(error?.code!=='EEXIST')throw error;const existing=await this.readWithLimit(storageKey,20*1024*1024);if(existing.sha256!==sha256)throw new Error('CONTENT_ADDRESS_COLLISION');}return{storageKey,relativePath:storageKey,sha256};}finally{await rm(temp,{force:true});}}
   async read(storageKey: string): Promise<Readable> { return createReadStream(this.safe(storageKey)); }
+  async readWithLimit(storageKey:string,maxBytes:number){if(!Number.isSafeInteger(maxBytes)||maxBytes<=0)throw new Error('READ_LIMIT_INVALID');const target=this.safe(storageKey);const info=await stat(target);if(info.size>maxBytes)throw new Error('STORAGE_READ_LIMIT_EXCEEDED');const chunks:Buffer[]=[];let sizeBytes=0;const hash=createHash('sha256');for await(const chunk of createReadStream(target)){const bytes=Buffer.from(chunk);sizeBytes+=bytes.length;if(sizeBytes>maxBytes)throw new Error('STORAGE_READ_LIMIT_EXCEEDED');hash.update(bytes);chunks.push(bytes);}return{bytes:Buffer.concat(chunks,sizeBytes),sha256:hash.digest('hex'),sizeBytes};}
   async exists(storageKey: string): Promise<boolean> { try { await access(this.safe(storageKey)); return true; } catch { return false; } }
-  async remove(storageKey: string): Promise<void> { await rm(this.safe(storageKey), {force:true}); }
+  async remove(storageKey: string): Promise<void> { if(storageKey.replaceAll('\\','/').startsWith('sha256/'))throw new Error('CONTENT_ADDRESS_IMMUTABLE');await rm(this.safe(storageKey), {force:true}); }
 }
