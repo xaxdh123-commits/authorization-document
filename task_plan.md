@@ -56,11 +56,11 @@ Phase 4
 # Production Deployment to 192.168.22.191 (2026-08-07)
 
 - [x] D1 inspect local Git/deploy state and identify GitHub publication gap
-- [ ] D2 sanitize deployable tree, create deployment branch, verify and push to GitHub
-- [ ] D3 inspect target Linux host and provision required runtime under /opt
-- [ ] D4 clone exact Git revision, configure environment/storage/database, migrate and build
-- [ ] D5 start API/worker with PM2 and serve Admin/H5 through Nginx
-- [ ] D6 run remote health/smoke checks and record exact deployed revision/endpoints
+- [x] D2 sanitize deployable tree, create deployment branch, verify and push to GitHub
+- [x] D3 inspect target Linux host and provision required runtime under /opt
+- [x] D4 clone exact Git revision, configure environment/storage/database, migrate and build
+- [x] D5 start API/worker with PM2 and serve Admin/H5 through Nginx
+- [x] D6 run remote health/smoke checks and record exact deployed revision/endpoints
 
 Deployment safety decisions:
 - Preserve the existing dirty working tree; do not reset or discard user work.
