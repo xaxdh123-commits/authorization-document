@@ -78,6 +78,8 @@ Deployment errors:
 - Dedicated database initialization attempt 1 stopped during preflight with exit code 3; inspect PostgreSQL cluster/socket status before creating any role, database, or environment file.
 - Dependency install SSH wrapper raised a local GBK `UnicodeEncodeError` while printing pnpm's checkmark after the remote process finished; verify remote install state rather than rerunning blindly.
 - Migration-order GREEN run found the deleted migration's empty directory still present (apply_patch removes files, not directories); verify it is empty, remove only that exact directory, and rerun.
+- Initial PM2 start showed rapid restart loops (API 15, worker 2), no port 3100 and no heartbeat; keep Nginx on its default site and inspect process logs before any traffic switch.
+- PM2 logs identified `@auth/contracts` as unresolvable at runtime because its package metadata omitted `main` and declared ESM despite CommonJS output; add a real child-process resolution regression test and align metadata.
 
 # Task12 Spec Re-review Fixes (2026-08-07)
 
