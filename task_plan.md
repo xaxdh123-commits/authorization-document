@@ -70,6 +70,14 @@ Deployment safety decisions:
 
 Deployment errors:
 - Commit attempt 1 stopped before commit because `git diff --cached --check` found two Markdown trailing spaces and one extra EOF blank line; fix formatting and rerun the staged gate.
+- GitHub push attempt 1 timed out connecting to `github.com:443` after about 21 seconds; diagnose local DNS/TCP/HTTPS and target-host GitHub reachability before retrying.
+- Local bundle attempt 1 was rejected by command safety policy because it combined a computed temporary path with deletion; use a new explicit workspace-local bundle path and no pre-delete.
+- Server-side GitHub push attempt 1 reached GitHub but was rejected with GH007 because the commit author used a protected private email; amend unpublished commit metadata to the repository noreply identity while preserving the exact tree.
+- Post-amend tree-hash command used unquoted PowerShell `HEAD^{tree}` and failed after the amend; verify identical content with `git diff <old> <new> --exit-code` instead.
+- Formal GitHub clone command exceeded the 180-second Paramiko channel timeout; inspect remote process and repository state before deciding whether any retry is needed.
+- Dedicated database initialization attempt 1 stopped during preflight with exit code 3; inspect PostgreSQL cluster/socket status before creating any role, database, or environment file.
+- Dependency install SSH wrapper raised a local GBK `UnicodeEncodeError` while printing pnpm's checkmark after the remote process finished; verify remote install state rather than rerunning blindly.
+- Migration-order GREEN run found the deleted migration's empty directory still present (apply_patch removes files, not directories); verify it is empty, remove only that exact directory, and rerun.
 
 # Task12 Spec Re-review Fixes (2026-08-07)
 
