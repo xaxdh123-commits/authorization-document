@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { assertPdfWorkerRuntimeConfig } from './main.js';
+import { assertPdfWorkerRuntimeConfig, scheduleRecurringTask } from './main.js';
 
 describe('worker production runtime pinning', () => {
   const previous = { nodeEnv: process.env.NODE_ENV, executable: process.env.CHROMIUM_EXECUTABLE_PATH, major: process.env.CHROMIUM_EXPECTED_MAJOR };
@@ -15,5 +15,16 @@ describe('worker production runtime pinning', () => {
   it('accepts an explicit executable and major in production', () => {
     process.env.NODE_ENV='production';process.env.CHROMIUM_EXECUTABLE_PATH='chrome';process.env.CHROMIUM_EXPECTED_MAJOR='140';
     expect(()=>assertPdfWorkerRuntimeConfig()).not.toThrow();
+  });
+});
+
+describe('worker process lifetime', () => {
+  it('keeps recurring production work referenced so PM2 does not restart a clean exit loop', () => {
+    const timer = scheduleRecurringTask(() => undefined, 60_000);
+    try {
+      expect(timer.hasRef()).toBe(true);
+    } finally {
+      clearInterval(timer);
+    }
   });
 });
