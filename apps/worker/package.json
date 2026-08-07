@@ -12,6 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@auth/contracts": "workspace:*",
     "@auth/storage": "workspace:*",
     "@auth/template-engine": "workspace:*",
     "@prisma/client": "^6.1.0",

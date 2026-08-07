@@ -4,7 +4,7 @@ import { computePdfContentDigest,type PdfRenderInput } from '@auth/template-engi
 import { MAX_CASE_BYTES } from '@auth/storage';
 import type { FinalRenderInput,SignaturePlacement } from './pdf.renderer.js';
 import type { PdfQueueOutboxMessage } from './pdf-finalization.publisher.js';
-import { AuditWriter } from '../../../../packages/contracts/src/audit.js';
+import { AuditWriter } from '@auth/contracts';
 
 export type ClaimedPdfTask={id:string;caseId:string;businessVersion:number;attempts:number;maxAttempts:number;leaseToken:string;claimGeneration:number};
 export type PreparedFinalSnapshot=Omit<FinalRenderInput,'resource'>&{resource:{storageKey:string;mimeType:'image/png'|'image/jpeg';sha256:string;bytes?:Buffer}};

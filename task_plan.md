@@ -80,6 +80,9 @@ Deployment errors:
 - Migration-order GREEN run found the deleted migration's empty directory still present (apply_patch removes files, not directories); verify it is empty, remove only that exact directory, and rerun.
 - Initial PM2 start showed rapid restart loops (API 15, worker 2), no port 3100 and no heartbeat; keep Nginx on its default site and inspect process logs before any traffic switch.
 - PM2 logs identified `@auth/contracts` as unresolvable at runtime because its package metadata omitted `main` and declared ESM despite CommonJS output; add a real child-process resolution regression test and align metadata.
+- The API runtime entry fix exposed a separate worker boundary violation: the worker imported `AuditWriter` from `packages/contracts/src`, which fails in built ESM. Added RED/GREEN workspace-boundary tests, switched to `@auth/contracts`, and declared the workspace runtime dependency.
+- Combined remote pull/build/start command was rejected before execution by local command policy due to nested `$PATH`/quote interpolation; split into smaller explicit commands with a fixed PATH.
+- Split PM2 start/check command was also rejected before execution because shell `$(...)` PID comparisons triggered policy; start first, then parse PM2 JSON locally in memory without printing environment values.
 
 # Task12 Spec Re-review Fixes (2026-08-07)
 

@@ -182,6 +182,9 @@ importers:
 
   apps/worker:
     dependencies:
+      '@auth/contracts':
+        specifier: workspace:*
+        version: link:../../packages/contracts
       '@auth/storage':
         specifier: workspace:*
         version: link:../../packages/storage
