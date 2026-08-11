@@ -24,8 +24,8 @@ export function createApiClient() {
     async getSession(): Promise<AuthSession> {
       if (demo) return wait({ userId: '1', roleKey: 'admin', displayName: '若依', roleName: '超级管理员', abilities: ['*:*:*'] });
       const result = await request<{ user?: { userId: number; nickName?: string; roles?: Array<{ roleKey: string; roleName?: string }> }; permissions?: string[] }>('/auth/getInfo');
-      const user = result.user; const firstRole = user?.roles?.[0];
-      return { userId: String(user?.userId ?? ''), roleKey: firstRole?.roleKey ?? 'common', displayName: user?.nickName ?? '当前用户', roleName: firstRole?.roleName ?? '普通用户', abilities: result.permissions ?? [] };
+      const user = result.user; const firstRole = user?.roles?.[0]; const roleKeys = user?.roles?.map((role) => role.roleKey) ?? [];
+      return { userId: String(user?.userId ?? ''), roleKey: firstRole?.roleKey ?? 'common', displayName: user?.nickName ?? '当前用户', roleName: firstRole?.roleName ?? '普通用户', abilities: roleKeys.includes('admin') ? ['*:*:*'] : result.permissions ?? [] };
     },
     createCase: (input: CaseCreateInput) => demo ? wait({ id: `CASE-${Date.now().toString().slice(-6)}` }) : request<{ id: string }>('/cases', { method: 'POST', body: JSON.stringify(input) }),
     listCases: (): Promise<CaseSummary[]> => demo ? wait(demoCases) : request('/cases'),
