@@ -4,7 +4,7 @@ import { App } from './App';
 import { AuthProvider } from '../auth/AuthProvider';
 import type { AuthClient } from '../api/client';
 
-const client: AuthClient = { getSession: async () => ({ userId: 'u1', roleKey: 'admin', abilities: ['dashboard:read'] }) };
+const client: AuthClient = { getSession: async () => ({ userId: 'u1', roleKey: 'admin', abilities: ['CASE_READ'] }) };
 
 test('以中文显示鉴权状态，并按能力渲染后台导航', async () => {
   render(<AuthProvider client={client}><MemoryRouter><App /></MemoryRouter></AuthProvider>);

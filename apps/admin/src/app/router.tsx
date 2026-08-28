@@ -18,20 +18,20 @@ const api = createApiClient();
 const guard = (ability: string, page: React.ReactNode) => <RouteGuard ability={ability}>{page}</RouteGuard>;
 export function AppRouter() { return <Routes>
   <Route path="/" element={<Navigate to="/dashboard" replace />} />
-  <Route path="/dashboard" element={guard('dashboard:read', <DashboardPage client={api} />)} />
-  <Route path="/cases" element={guard('cases:read', <CaseListPage client={api} />)} />
-  <Route path="/cases/new" element={guard('cases:create', <CaseCreatePage client={api} />)} />
-  <Route path="/cases/:id" element={guard('cases:read', <CaseDetailPage />)} />
+  <Route path="/dashboard" element={guard('CASE_READ', <DashboardPage client={api} />)} />
+  <Route path="/cases" element={guard('CASE_READ', <CaseListPage client={api} />)} />
+  <Route path="/cases/new" element={guard('CASE_CREATE', <CaseCreatePage client={api} />)} />
+  <Route path="/cases/:id" element={guard('CASE_READ', <CaseDetailPage />)} />
   <Route path="/reviews" element={<Navigate to="/reviews/pending" replace />} />
-  <Route path="/reviews/pending" element={guard('reviews:read', <ReviewQueuePage client={api} mode="pending" />)} />
-  <Route path="/reviews/supplement" element={guard('reviews:read', <ReviewQueuePage client={api} mode="supplement" />)} />
-  <Route path="/reviews/:id" element={guard('reviews:read', <ReviewDetailPage />)} />
-  <Route path="/requirements" element={guard('requirements:read', <RequirementsPage />)} />
-  <Route path="/templates" element={guard('templates:read', <TemplatesPage />)} />
-  <Route path="/templates/new" element={guard('templates:write', <TemplateEditorPage />)} />
-  <Route path="/templates/:id/editor" element={guard('templates:write', <TemplateEditorPage />)} />
-  <Route path="/role-mappings" element={guard('role-mappings:read', <RoleMappingsPage />)} />
-  <Route path="/audit-logs" element={guard('audit-logs:read', <AuditLogsPage />)} />
-  <Route path="/settings" element={guard('settings:read', <SettingsPage />)} />
+  <Route path="/reviews/pending" element={guard('REVIEW_ITEM', <ReviewQueuePage client={api} mode="pending" />)} />
+  <Route path="/reviews/supplement" element={guard('REVIEW_ITEM', <ReviewQueuePage client={api} mode="supplement" />)} />
+  <Route path="/reviews/:id" element={guard('REVIEW_ITEM', <ReviewDetailPage />)} />
+  <Route path="/requirements" element={guard('REQUIREMENT_MANAGE', <RequirementsPage />)} />
+  <Route path="/templates" element={guard('TEMPLATE_MANAGE', <TemplatesPage />)} />
+  <Route path="/templates/new" element={guard('TEMPLATE_MANAGE', <TemplateEditorPage />)} />
+  <Route path="/templates/:id/editor" element={guard('TEMPLATE_MANAGE', <TemplateEditorPage />)} />
+  <Route path="/role-mappings" element={guard('ROLE_MAPPING_MANAGE', <RoleMappingsPage />)} />
+  <Route path="/audit-logs" element={guard('AUDIT_READ_ALL', <AuditLogsPage />)} />
+  <Route path="/settings" element={guard('ROLE_MAPPING_MANAGE', <SettingsPage />)} />
   <Route path="*" element={<NotFoundPage />} />
 </Routes>; }

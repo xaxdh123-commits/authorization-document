@@ -4,24 +4,24 @@ import { useAuth } from '../auth/AuthProvider';
 
 const groups = [
   { title: '业务中心', items: [
-    { to: '/dashboard', icon: '▦', label: '工作台', ability: 'dashboard:read' },
-    { to: '/cases', icon: '▤', label: '业务单管理', ability: 'cases:read' },
-    { to: '/reviews/pending', icon: '✓', label: '审核中心', ability: 'reviews:read' },
+    { to: '/dashboard', icon: '▦', label: '工作台', ability: 'CASE_READ' },
+    { to: '/cases', icon: '▤', label: '业务单管理', ability: 'CASE_READ' },
+    { to: '/reviews/pending', icon: '✓', label: '审核中心', ability: 'REVIEW_ITEM' },
   ]},
   { title: '配置中心', items: [
-    { to: '/requirements', icon: '☷', label: '资料项配置', ability: 'requirements:read' },
-    { to: '/templates', icon: '▧', label: '授权书模板', ability: 'templates:read' },
+    { to: '/requirements', icon: '☷', label: '资料项配置', ability: 'REQUIREMENT_MANAGE' },
+    { to: '/templates', icon: '▧', label: '文档模板', ability: 'TEMPLATE_MANAGE' },
   ]},
   { title: '系统管理', items: [
-    { to: '/role-mappings', icon: '♙', label: '角色权限映射', ability: 'role-mappings:read' },
-    { to: '/audit-logs', icon: '◷', label: '操作审计日志', ability: 'audit-logs:read' },
-    { to: '/settings', icon: '⚙', label: '系统设置', ability: 'settings:read' },
+    { to: '/role-mappings', icon: '♙', label: '角色权限映射', ability: 'ROLE_MAPPING_MANAGE' },
+    { to: '/audit-logs', icon: '◷', label: '操作审计日志', ability: 'AUDIT_READ_ALL' },
+    { to: '/settings', icon: '⚙', label: '系统设置', ability: 'ROLE_MAPPING_MANAGE' },
   ]},
 ];
 
 const titles: Record<string, string> = {
   dashboard: '工作台', cases: '业务单管理', reviews: '审核中心', requirements: '资料项配置',
-  templates: '授权书模板', 'role-mappings': '角色权限映射', 'audit-logs': '操作审计日志', settings: '系统设置',
+  templates: '文档模板', 'role-mappings': '角色权限映射', 'audit-logs': '操作审计日志', settings: '系统设置',
 };
 
 export function AdminLayout({ children }: { children: ReactNode }) {

@@ -7,7 +7,9 @@ import type { ReviewSummary } from '../features/reviews/ReviewQueuePage';
 
 const apiBase = (import.meta.env.VITE_API_BASE_URL ?? (import.meta.env.DEV ? 'http://127.0.0.1:3000' : '/api')).replace(/\/$/, '');
 export const isDemoMode = () => import.meta.env.VITE_DEMO_MODE === 'true' || new URLSearchParams(window.location.search).get('demo') === '1';
-export function getAccessToken() { const query = new URLSearchParams(window.location.search); return query.get('access_token') ?? query.get('token') ?? localStorage.getItem('access_token') ?? localStorage.getItem('token'); }
+const roleNames: Record<string, string> = { admin: '超级管理员', common: '普通用户', service: '客服', customer_service: '客服', reviewer: '审核员', market: '分销管理' };
+function readAuthCookie() { const match = document.cookie.split('; ').find((item) => item.startsWith('Admin-Token=') || item.startsWith('admin_token=')); return match ? decodeURIComponent(match.slice(match.indexOf('=') + 1)) : null; }
+export function getAccessToken() { const query = new URLSearchParams(window.location.search); return query.get('access_token') ?? query.get('token') ?? localStorage.getItem('access_token') ?? localStorage.getItem('token') ?? readAuthCookie(); }
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   const headers = new Headers(init.headers); headers.set('Content-Type', 'application/json');
   const token = getAccessToken(); if (token) headers.set('Authorization', `Bearer ${token}`);
@@ -24,8 +26,10 @@ export function createApiClient() {
     async getSession(): Promise<AuthSession> {
       if (demo) return wait({ userId: '1', roleKey: 'admin', displayName: '若依', roleName: '超级管理员', abilities: ['*:*:*'] });
       const result = await request<{ user?: { userId: number; nickName?: string; roles?: Array<{ roleKey: string; roleName?: string }> }; permissions?: string[] }>('/auth/getInfo');
-      const user = result.user; const firstRole = user?.roles?.[0]; const roleKeys = user?.roles?.map((role) => role.roleKey) ?? [];
-      return { userId: String(user?.userId ?? ''), roleKey: firstRole?.roleKey ?? 'common', displayName: user?.nickName ?? '当前用户', roleName: firstRole?.roleName ?? '普通用户', abilities: roleKeys.includes('admin') ? ['*:*:*'] : result.permissions ?? [] };
+      const user = result.user; const firstRole = user?.roles?.[0];
+      const abilities = result.permissions ?? [];
+      const roleKey = firstRole?.roleKey ?? 'common';
+      return { userId: String(user?.userId ?? ''), roleKey, displayName: user?.nickName ?? '当前用户', roleName: firstRole?.roleName ?? roleNames[roleKey] ?? roleKey, abilities };
     },
     createCase: (input: CaseCreateInput) => demo ? wait({ id: `CASE-${Date.now().toString().slice(-6)}` }) : request<{ id: string }>('/cases', { method: 'POST', body: JSON.stringify(input) }),
     listCases: (): Promise<CaseSummary[]> => demo ? wait(demoCases) : request('/cases'),
